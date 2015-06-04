@@ -13,7 +13,18 @@ namespace Cygni {
         int get_height();
         int get_size();
 
+        /**
+         * Is this x index within the grid?
+         *
+         * @todo accept uint32_t, remove negative index check
+         */
         bool is_valid_x_index(int x);
+
+        /**
+         * Is this y index within the grid?
+         *
+         * @todo accept uint32_t, remove negative index check
+         */
         bool is_valid_y_index(int y);
 
         bool is_valid_position(int x, int y);
