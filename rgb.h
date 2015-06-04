@@ -1,5 +1,7 @@
 #pragma once
 
+#include "platform.h"
+
 namespace Cygni {
     struct RGB {
         // TODO: uint8_t

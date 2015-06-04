@@ -1,5 +1,6 @@
 #pragma once
 
+#include "platform.h"
 #include "rgb.h"
 
 namespace Cygni {
