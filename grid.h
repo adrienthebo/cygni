@@ -12,13 +12,13 @@ namespace Cygni {
         int get_height();
         int get_size();
 
-        RGB & get_pixel(int x, int y);
-        void set_pixel(int x, int y, RGB value);
-
         bool is_valid_x_index(int x);
         bool is_valid_y_index(int y);
 
         bool is_valid_position(int x, int y);
+
+        RGB * get_pixel(int x, int y);
+        void set_pixel(int x, int y, RGB * value);
 
     protected:
 
