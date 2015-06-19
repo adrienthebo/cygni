@@ -52,9 +52,12 @@ set(TEENSY_USB_MODE "SERIAL" CACHE STRING "What kind of USB device the Teensy sh
 set_property(CACHE TEENSY_USB_MODE PROPERTY STRINGS SERIAL HID SERIAL_HID MIDI RAWHID FLIGHTSIM)
 
 ################################################################################
-# Teensy compiler/linker flags
+# Teensy library flags
 
-include_directories("${TEENSY_ROOT}")
+include_directories(${TEENSY_ROOT})
+
+################################################################################
+# Teensy compiler/linker flags
 
 set(ARCH_FLAGS "-mcpu=cortex-m4 -mthumb")
 
