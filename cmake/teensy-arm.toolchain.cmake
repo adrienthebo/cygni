@@ -57,10 +57,9 @@ set_property(CACHE TEENSY_USB_MODE PROPERTY STRINGS SERIAL HID SERIAL_HID MIDI R
 include_directories("${TEENSY_ROOT}")
 
 set(ARCH_FLAGS "-mcpu=cortex-m4 -mthumb")
-set(BASE_FLAGS "-Os -Wall -nostdlib -ffunction-sections -fdata-sections -MMD ${ARCH_FLAGS}")
 
-set(CMAKE_C_FLAGS "${BASE_FLAGS}" CACHE STRING "c flags") # XXX Generate TIME_T dynamically.
-set(CMAKE_CXX_FLAGS "${BASE_FLAGS} -fno-exceptions -fno-rtti -felide-constructors -std=gnu++0x" CACHE STRING "c++ flags")
+set(CMAKE_C_FLAGS "-Os -Wall -nostdlib -ffunction-sections -fdata-sections -MMD ${ARCH_FLAGS}" CACHE STRING "c flags")
+set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -fno-exceptions -fno-rtti -felide-constructors -std=gnu++0x" CACHE STRING "c++ flags")
 
 set(LINKER_FLAGS "-Os -Wl,--gc-sections,--defsym=__rtc_localtime=0 --specs=nano.specs ${ARCH_FLAGS} -T${TEENSY_ROOT}/mk20dx256.ld" )
 set(LINKER_LIBS "-larm_cortexM4l_math -lm" )
