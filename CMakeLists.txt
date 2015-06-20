@@ -1,13 +1,21 @@
 cmake_minimum_required (VERSION 3.0)
 project (Cygni)
-add_executable(main main.cpp)
-
-include_directories(vendor/Catch/include)
 
 add_library(cygni grid.cpp)
 
-add_subdirectory(test)
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  add_subdirectory(test)
+else()
+  include("vendor/teensy-cmake/cmake/Teensy.cmake")
 
-enable_testing()
+  include_directories(vendor/OctoWS2811)
+  add_teensy_library(OctoWS2811 vendor/OctoWS2811/OctoWS2811.cpp)
 
-add_test(NAME "cygni\\ unit\\ tests" COMMAND test/test_cygni)
+  add_teensy_core(teensy_core)
+
+  add_teensy_executable(main main.cpp grid.cpp)
+  target_link_libraries(main OctoWS2811 teensy_core)
+
+  add_teensy_executable(blink blink.cpp)
+  target_link_libraries(blink teensy_core)
+endif()
