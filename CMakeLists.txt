@@ -1,5 +1,5 @@
-cmake_minimum_required (VERSION 3.0)
-project (Cygni)
+cmake_minimum_required(VERSION 3.0)
+project(Cygni)
 
 add_library(cygni grid.cpp)
 
