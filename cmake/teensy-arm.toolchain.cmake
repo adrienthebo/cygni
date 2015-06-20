@@ -43,13 +43,18 @@ add_definitions("-DTEENSYDUINO=${TEENSYDUINO_VERSION}")
 # Teensy hardware configuration
 
 set(TEENSY_MODEL "MK20DX256")
-add_definitions("-D__${TEENSY_MODEL}__")
 
 set(TEENSY_FREQUENCY "96" CACHE STRING "Frequency of the Teensy MCU (Mhz)")
 set_property(CACHE TEENSY_FREQUENCY PROPERTY STRINGS 96 72 48 24 16 8 4 2)
 
 set(TEENSY_USB_MODE "SERIAL" CACHE STRING "What kind of USB device the Teensy should emulate")
 set_property(CACHE TEENSY_USB_MODE PROPERTY STRINGS SERIAL HID SERIAL_HID MIDI RAWHID FLIGHTSIM)
+
+add_definitions("-D__${TEENSY_MODEL}__")
+add_definitions("-DF_CPU=${TEENSY_FREQUENCY}000000")
+
+# Hardcoded for sanity, might not be good for the long term.
+add_definitions("-DUSB_${TEENSY_USB_MODE}")
 
 ################################################################################
 # Teensy library flags
