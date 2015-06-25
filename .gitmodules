@@ -6,7 +6,7 @@
 	url = https://github.com/PaulStoffregen/cores
 [submodule "vendor/teensy-cmake"]
 	path = vendor/teensy-cmake
-	url = https://github.com/xya/teensy-cmake
+	url = git://github.com/adrienthebo/teensy-cmake
 [submodule "vendor/OctoWS2811"]
 	path = vendor/OctoWS2811
 	url = git://github.com/PaulStoffregen/OctoWS2811
