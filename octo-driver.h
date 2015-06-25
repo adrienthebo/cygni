@@ -1,5 +1,8 @@
-#include <OctoWS2811.h>
 #include "driver.h"
+
+#ifndef Arduino_h
+#include <OctoWS2811.h>
+#endif
 
 namespace Cygni {
     struct OctoDriver : Driver {
@@ -10,10 +13,10 @@ namespace Cygni {
             _strip_length = strip_length;
             _flags = flags;
 
-            int buffer_size = _length * 6 * sizeof(uint32_t);
+            int buffer_size = _length * 6;
 
-            _frame_buf = new char[buffer_size];
-            _draw_buf  = new char[buffer_size];
+            _frame_buf = new uint32_t[buffer_size];
+            _draw_buf  = new uint32_t[buffer_size];
 
             _pixels = new OctoWS2811(_strip_length, _frame_buf, _draw_buf, _flags);
             _pixels->begin();
@@ -55,8 +58,8 @@ namespace Cygni {
 
         protected:
 
-        char *_frame_buf;
-        char *_draw_buf;
+        uint32_t *_frame_buf;
+        uint32_t *_draw_buf;
         int _strip_length;
         int _flags;
 
