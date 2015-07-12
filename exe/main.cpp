@@ -1,39 +1,77 @@
 #include "platform.h"
-
+#include "pin13.h"
 #include "octo-driver.h"
+
+#define STRIP_LENGTH 5
+#define MAX_PIXELS 5 * 8
 
 Cygni::OctoDriver *driver;
 
-void blink(int duration) {
-    digitalWrite(13, HIGH);
-    delay(duration);
-    digitalWrite(13, LOW);
-    delay(duration);
-}
-
-void pulse(int count, int duration) {
-    for(int i = 0; i < count; i++) blink(duration);
-}
-
 void setup() {
     pinMode(13, OUTPUT);
-    pulse(5, 25);
+    pulse13(5, 25);
 
-    driver = new Cygni::OctoDriver(50 * 8, 50);
+    driver = new Cygni::OctoDriver(STRIP_LENGTH * 8, STRIP_LENGTH);
     driver->clear();
     driver->show();
 }
 
+void strobeIndex(uint32_t pixel_index) {
+    int duration = 50;
+
+    driver->set_pixel(pixel_index, 128, 128, 128);
+    if(pixel_index % 5 == 0) {
+        driver->show(4 * duration);
+    } else {
+        driver->show(duration);
+    }
+
+    driver->set_pixel(pixel_index, 255, 0, 0);
+    driver->show(duration);
+
+    driver->set_pixel(pixel_index, 0, 255, 0);
+    driver->show(duration);
+
+    driver->set_pixel(pixel_index, 0, 0, 255);
+    driver->show(duration);
+
+    driver->clear_pixel(pixel_index);
+}
+
+void strobeRange() {
+    int duration = 500;
+    for(int idx = 0; idx < MAX_PIXELS; idx++) {
+        driver->set_pixel(idx, 128, 128, 128);
+    }
+    driver->show(duration);
+
+    for(int idx = 0; idx < MAX_PIXELS; idx++) {
+        driver->set_pixel(idx, 255, 0, 0);
+    }
+    driver->show(duration);
+
+    for(int idx = 0; idx < MAX_PIXELS; idx++) {
+        driver->set_pixel(idx, 0, 255, 0);
+    }
+    driver->show(duration);
+
+    for(int idx = 0; idx < MAX_PIXELS; idx++) {
+        driver->set_pixel(idx, 0, 0, 255);
+    }
+    driver->show(duration);
+
+    for(int idx = 0; idx < MAX_PIXELS; idx++) {
+        driver->clear_pixel(idx);
+    }
+}
+
 void loop() {
-    blink(100);
+    blink13(5);
 
-    driver->set_pixel(1, 128, 0, 0);
-    driver->show();
-
-    delay(100);
-    driver->clear_pixel(1);
-    driver->show();
-    delay(100);
+    for(int idx = 0; idx < MAX_PIXELS; idx++) {
+        strobeIndex(idx);
+    }
+    strobeRange();
 }
 
 int main() {
