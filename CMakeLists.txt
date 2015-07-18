@@ -10,9 +10,11 @@ else()
 
   include_directories(vendor/Color)
   include_directories(vendor/OctoWS2811)
+  include_directories(vendor/Bounce)
   include_directories(.)
   add_teensy_library(OctoWS2811 vendor/OctoWS2811/OctoWS2811.cpp)
   add_teensy_library(Color vendor/Color/Color.cpp)
+  add_teensy_library(Bounce vendor/Bounce/Bounce.cpp)
 
   add_teensy_core(teensy_core)
 
