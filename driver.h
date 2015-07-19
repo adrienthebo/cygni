@@ -13,6 +13,7 @@ namespace Cygni {
             return false;
         }
 
+        virtual int get_length() = 0;
     protected:
 
         int _length;
