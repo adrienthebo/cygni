@@ -5,6 +5,8 @@
 #define STRIP_LENGTH 5
 #define MAX_PIXELS 5 * 8
 
+using namespace pin13;
+
 Cygni::OctoDriver *driver;
 
 void setup() {
