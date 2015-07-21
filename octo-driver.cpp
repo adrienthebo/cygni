@@ -21,4 +21,8 @@ namespace Cygni {
         delete _draw_buf;
         delete _pixels;
     }
+
+    int OctoDriver::get_length() {
+        return _length;
+    }
 };

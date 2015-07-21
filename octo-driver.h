@@ -46,6 +46,8 @@ namespace Cygni {
             return _pixels->busy();
         }
 
+        virtual int get_length();
+
         protected:
 
         uint32_t *_frame_buf;
