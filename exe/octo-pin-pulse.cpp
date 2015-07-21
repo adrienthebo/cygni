@@ -4,6 +4,8 @@
 uint8_t octo_pins[] = {2, 14, 7, 8, 6, 21, 22, 5};
 uint8_t pin_count = 8;
 
+using namespace pin13;
+
 void bitBang(uint8_t pin, uint32_t delayPeriod) {
     for(int i = 0; i < pin; i++) {
         digitalWrite(pin, HIGH);
