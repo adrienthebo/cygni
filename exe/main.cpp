@@ -19,14 +19,10 @@ void setup() {
 }
 
 void strobeIndex(uint32_t pixel_index) {
-    int duration = 50;
+    int duration = 250;
 
-    driver->set_pixel(pixel_index, 128, 128, 128);
-    if(pixel_index % 5 == 0) {
-        driver->show(4 * duration);
-    } else {
-        driver->show(duration);
-    }
+    driver->set_pixel(pixel_index, 0x808080);
+    driver->show(duration);
 
     driver->set_pixel(pixel_index, 255, 0, 0);
     driver->show(duration);
@@ -41,9 +37,9 @@ void strobeIndex(uint32_t pixel_index) {
 }
 
 void strobeRange() {
-    int duration = 500;
+    int duration = 250;
     for(int idx = 0; idx < MAX_PIXELS; idx++) {
-        driver->set_pixel(idx, 128, 128, 128);
+        driver->set_pixel(idx, 255, 255, 255);
     }
     driver->show(duration);
 
@@ -67,12 +63,17 @@ void strobeRange() {
     }
 }
 
-void loop() {
-    blink13(5);
+int group_from_index(int idx) {
+    return idx / 5;
+}
 
+void loop() {
     for(int idx = 0; idx < MAX_PIXELS; idx++) {
-        strobeIndex(idx);
+        if(group_from_index(idx) % 2 == 0) {
+            strobeIndex(idx);
+        }
     }
+
     strobeRange();
 }
 
