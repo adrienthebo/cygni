@@ -5,6 +5,8 @@
 namespace Cygni {
     struct Shift : Cygni::Effect {
 
+        Shift() {}
+
         Shift(float sat, float lum) {
             _sat = sat;
             _lum = lum;
