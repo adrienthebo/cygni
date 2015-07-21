@@ -5,6 +5,11 @@
 namespace Cygni {
     struct Shift : Cygni::Effect {
 
+        Shift(float sat, float lum) {
+            _sat = sat;
+            _lum = lum;
+        }
+
         virtual void apply(Cygni::OctoDriver *driver) {
             Color c;
             float current_hue = _hue;
