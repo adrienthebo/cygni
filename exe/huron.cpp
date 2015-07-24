@@ -25,7 +25,7 @@ void setup() {
 
 void loop() {
     dude.apply(driver);
-    driver->show(100);
+    driver->show(10);
     while(driver->is_busy());
 }
 
