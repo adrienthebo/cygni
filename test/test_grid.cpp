@@ -54,7 +54,7 @@ TEST_CASE("Bounds check - position", "[grid]") {
 }
 
 TEST_CASE("Assignment and retrieval", "[grid]") {
-    Grid g(5, 10);
+    Grid g(3, 3);
     RGB val = {10, 25, 3};
 
     g.set_pixel(1, 2, &val);
