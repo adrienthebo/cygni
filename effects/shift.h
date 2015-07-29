@@ -1,5 +1,6 @@
 #pragma once
 #include <driver.h>
+#include "effect.h"
 #include <Color.h>
 
 namespace Cygni {
