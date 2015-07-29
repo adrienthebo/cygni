@@ -5,27 +5,46 @@ namespace Cygni {
     struct EffectSet {
 
         EffectSet(uint32_t size) {
-            _index = 0;
             _size = size;
             _list = new Effect*[_size];
+        }
+
+        EffectSet(uint32_t size, Effect *list[]) : EffectSet(size) {
+            memcpy(_list, list, _size * sizeof(Effect *));
         }
 
         Effect * current() {
             return _list[_index];
         }
 
+        void next_effect() {
+            _index = (_index + 1) % _size;
+        }
+
         uint32_t get_size() {
             return _size;
         }
 
+        uint32_t get_index() {
+            return _index;
+        }
+
+        void apply(Driver *driver) {
+            current()->apply(driver);
+        }
+
     private:
 
-        uint32_t _size;
+        /**
+         * Thems effects which we be gettin, yo.
+         */
         Effect **_list;
 
+        uint32_t _size;
+
         /**
-         * Points to the current effect
+         * The index of the current effect.
          */
-        uint32_t _index;
+        uint32_t _index = 0;
     };
 };
