@@ -3,8 +3,11 @@ project(Cygni)
 
 include_directories(.)
 
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_library(cygni grid.cpp)
+  target_compile_features(cygni PUBLIC cxx_nonstatic_member_init cxx_range_for)
+
   add_subdirectory(test)
 else()
   include("vendor/teensy-cmake/cmake/Teensy.cmake")
