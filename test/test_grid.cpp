@@ -53,6 +53,15 @@ TEST_CASE("Bounds check - position", "[grid]") {
     REQUIRE(g.is_valid_position(0, 10) == false);
 }
 
+TEST_CASE("Bounds check - offset", "[grid]") {
+    Grid g(2, 2);
+
+    REQUIRE(g.is_valid_offset(0) == true);
+    REQUIRE(g.is_valid_offset(3) == true);
+    REQUIRE(g.is_valid_offset(4) == false);
+    REQUIRE(g.is_valid_offset(-1) == false);
+}
+
 TEST_CASE("Assignment and retrieval", "[grid]") {
     Grid g(3, 3);
     RGB val = {10, 25, 3};
@@ -81,6 +90,17 @@ TEST_CASE("Assignment and retrieval", "[grid]") {
     }
 }
 
+TEST_CASE("Offset retrieval") {
+    Grid g(3, 3);
+    RGB val = {128, 64, 32};
+    g.set_pixel(1, 2, &val);
+
+    RGB ret = *g.get_pixel(1, 2);
+    REQUIRE(ret.red == 128);
+    REQUIRE(ret.green == 64);
+    REQUIRE(ret.blue == 32);
+}
+
 TEST_CASE("Invalid assignment", "[grid]") {
     Grid g(5, 10);
     RGB val = {10, 25, 3};
@@ -90,4 +110,37 @@ TEST_CASE("Invalid assignment", "[grid]") {
     RGB *ret = g.get_pixel(10, 20);
 
     REQUIRE(ret == 0);
+}
+
+TEST_CASE("range based for loop - visit all locations") {
+    Grid g(3, 3);
+
+    int visited = 0;
+    for(auto it : g) {
+        ++visited;
+    }
+    REQUIRE(visited == 9);
+}
+
+TEST_CASE("range based for loop - alter all locations") {
+    Grid g(3, 3);
+
+    int count = 0;
+    for(auto& it : g) {
+        it.red = count;
+        it.green = count;
+        it.blue = count;
+        ++count;
+    }
+
+    for(int y = 0; y < g.get_height(); y++) {
+        for(int x = 0; x < g.get_width(); x++) {
+            int expected = x + y * 3;
+
+            RGB pix = *g.get_pixel(x,  y);
+            REQUIRE(pix.red == expected);
+            REQUIRE(pix.green == expected);
+            REQUIRE(pix.blue == expected);
+        }
+    }
 }

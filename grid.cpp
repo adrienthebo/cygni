@@ -35,6 +35,10 @@ namespace Cygni {
         return is_valid_x_index(x) && is_valid_y_index(y);
     }
 
+    bool Grid::is_valid_offset(uint32_t offset) {
+        return offset < _size;
+    }
+
     void Grid::set_pixel(int x, int y, RGB * value) {
         if(!is_valid_position(x, y)) {
             return;
@@ -49,5 +53,20 @@ namespace Cygni {
         }
         int idx = _width * y + x;
         return &_grid[idx];
+    }
+
+    RGB * Grid::get_pixel(uint32_t offset) {
+        if(!is_valid_offset(offset)) {
+            return 0;
+        }
+        return &_grid[offset];
+    }
+
+    RGB * Grid::begin() {
+        return &_grid[0];
+    }
+
+    RGB *Grid::end() {
+        return &_grid[_size];
     }
 };

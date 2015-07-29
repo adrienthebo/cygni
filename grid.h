@@ -29,8 +29,17 @@ namespace Cygni {
 
         bool is_valid_position(int x, int y);
 
+        bool is_valid_offset(uint32_t offset);
+
         RGB * get_pixel(int x, int y);
+
+        RGB * get_pixel(uint32_t offset);
+
         void set_pixel(int x, int y, RGB * value);
+
+        RGB * begin();
+        RGB * end();
+
 
     protected:
 
