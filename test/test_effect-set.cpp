@@ -8,10 +8,6 @@ struct DummyEffect : Effect {
     bool applied = false;
 };
 
-struct DummyDriver : Driver {
-    void apply() {};
-}
-
 SCENARIO("Initialize effect set") {
     EffectSet es(1);
     REQUIRE(es.get_size() == 1);
@@ -41,14 +37,4 @@ SCENARIO("Incrementing the effect index") {
         REQUIRE(es.current() == &d0);
         REQUIRE(es.get_index() == 0);
     }
-}
-
-SCENARIO("Forwarding an apply") {
-    DummyEffect d0;
-    Effect *effects[] = {&d0};
-
-    EffectSet es(1, effects);
-    es.apply();
-    REQUIRE(d0.applied);
-
 }
