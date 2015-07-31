@@ -128,7 +128,7 @@ TEST_CASE("range based for loop - alter all locations") {
 
     for(int y = 0; y < g.get_height(); y++) {
         for(int x = 0; x < g.get_width(); x++) {
-            int level = x + y * 3;
+            uint8_t level = x + y * 3;
 
             RGB expected = {level, level, level};
             RGB ret = *g.get_pixel(x,  y);
