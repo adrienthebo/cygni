@@ -8,5 +8,9 @@ namespace Cygni {
         int red;
         int green;
         int blue;
+
+        bool operator==(const RGB &other) {
+            return red == other.red && green == other.green && blue == other.blue;
+        }
     };
 };

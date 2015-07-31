@@ -15,14 +15,13 @@ TEST_CASE("Initialize grid", "[grid]") {
 TEST_CASE("Initialize grid - zero out memory", "[grid]") {
     Grid g(2, 3);
 
-    RGB *val;
+    RGB val;
+    RGB blank = {0, 0, 0};
 
     for(int x = 0; x < g.get_width(); x++) {
         for(int y = 0; y < g.get_height(); y++) {
-            val = g.get_pixel(x, y);
-            REQUIRE(val->red == 0);
-            REQUIRE(val->green == 0);
-            REQUIRE(val->blue == 0);
+            val = *g.get_pixel(x, y);
+            REQUIRE(val == blank);
         }
     }
 }
@@ -65,16 +64,14 @@ TEST_CASE("Bounds check - offset", "[grid]") {
 TEST_CASE("Assignment and retrieval", "[grid]") {
     Grid g(3, 3);
     RGB val = {10, 25, 3};
+    RGB expected = {10, 25, 3};
 
     g.set_pixel(1, 2, &val);
-
     RGB ret = *g.get_pixel(1, 2);
 
-    REQUIRE(ret.red == 10);
-    REQUIRE(ret.green == 25);
-    REQUIRE(ret.blue == 3);
+    REQUIRE(ret == expected);
 
-    RGB *null_val;
+    RGB blank_val = {0, 0, 0};
 
     // Assert that no other values have been changed
     for(int x = 0; x < g.get_width(); x++) {
@@ -82,10 +79,7 @@ TEST_CASE("Assignment and retrieval", "[grid]") {
             if(x == 1 && y == 2) {
                 continue;
             }
-            null_val = g.get_pixel(x, y);
-            REQUIRE(null_val->red == 0);
-            REQUIRE(null_val->green == 0);
-            REQUIRE(null_val->blue == 0);
+            REQUIRE(*g.get_pixel(x, y) == blank_val);
         }
     }
 }
@@ -93,12 +87,11 @@ TEST_CASE("Assignment and retrieval", "[grid]") {
 TEST_CASE("Offset retrieval") {
     Grid g(3, 3);
     RGB val = {128, 64, 32};
+    RGB expected = {128, 64, 32};
     g.set_pixel(1, 2, &val);
 
     RGB ret = *g.get_pixel(1, 2);
-    REQUIRE(ret.red == 128);
-    REQUIRE(ret.green == 64);
-    REQUIRE(ret.blue == 32);
+    REQUIRE(ret == expected);
 }
 
 TEST_CASE("Invalid assignment", "[grid]") {
@@ -135,12 +128,12 @@ TEST_CASE("range based for loop - alter all locations") {
 
     for(int y = 0; y < g.get_height(); y++) {
         for(int x = 0; x < g.get_width(); x++) {
-            int expected = x + y * 3;
+            int level = x + y * 3;
 
-            RGB pix = *g.get_pixel(x,  y);
-            REQUIRE(pix.red == expected);
-            REQUIRE(pix.green == expected);
-            REQUIRE(pix.blue == expected);
+            RGB expected = {level, level, level};
+            RGB ret = *g.get_pixel(x,  y);
+
+            REQUIRE(ret == expected);
         }
     }
 }
