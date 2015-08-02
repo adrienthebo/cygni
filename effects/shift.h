@@ -13,7 +13,7 @@ namespace Cygni {
             _lum = lum;
         }
 
-        virtual void apply(Cygni::OctoDriver *driver) {
+        virtual void apply(Cygni::Driver *driver) {
             Color c;
             float current_hue = _hue;
             for(int idx = 0; idx < driver->get_length(); idx++) {
