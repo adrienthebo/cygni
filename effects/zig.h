@@ -15,16 +15,13 @@ namespace Cygni {
         }
 
         void apply(Driver *driver) {
-            if(++_ctr < 10) {
-                return;
-            } else {
-                _ctr = 0;
-            }
+            scale(driver);
+
+            _hue.next();
 
             if(move()) {
-                driver->clear();
+                driver->set_pixel(_cur_idx, 0xFFFFFF);
             } else {
-                _hue.next();
                 driver->set_pixel(_cur_idx, _hue.red(), _hue.green(), _hue.blue());
             }
         }
@@ -45,6 +42,15 @@ namespace Cygni {
         }
 
     private:
+
+        void scale(Driver *driver) {
+            RGB tmp;
+            for(int i = 0; i < 50; i++) {
+                tmp.from_int(driver->get_pixel(i));
+                tmp.scale(240);
+                driver->set_pixel(i, tmp.to_int());
+            }
+        }
 
         Hue _hue;
         uint32_t _cur_idx;
