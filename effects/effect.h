@@ -3,6 +3,6 @@
 
 namespace Cygni {
     struct Effect {
-        virtual void apply(Cygni::OctoDriver *driver) = 0;
+        virtual void apply(Cygni::Driver *driver) = 0;
     };
 };

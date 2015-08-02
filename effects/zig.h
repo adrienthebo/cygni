@@ -14,7 +14,7 @@ namespace Cygni {
             _hue = Hue();
         }
 
-        void apply(OctoDriver *driver) {
+        void apply(Driver *driver) {
             if(++_ctr < 10) {
                 return;
             } else {

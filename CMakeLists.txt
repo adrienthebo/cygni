@@ -26,7 +26,7 @@ else()
   add_teensy_library(cygni grid.cpp octo-driver.cpp)
 
   add_teensy_executable(main exe/main.cpp grid.cpp)
-  target_link_libraries(main OctoWS2811 teensy_core cygni)
+  target_link_libraries(main cygni OctoWS2811 teensy_core)
 
   add_teensy_executable(blink exe/blink.cpp)
   target_link_libraries(blink teensy_core)
@@ -37,7 +37,7 @@ else()
   add_teensy_executable(octo-pin-steady exe/octo-pin-steady.cpp)
   target_link_libraries(octo-pin-steady teensy_core)
 
-  add_teensy_executable(huron exe/huron.cpp grid.cpp)
-  target_link_libraries(huron OctoWS2811 teensy_core cygni Color)
+  add_teensy_executable(huron exe/huron.cpp grid.cpp vendor/OctoWS2811/OctoWS2811.cpp)
+  target_link_libraries(huron Color cygni OctoWS2811 teensy_core)
 
 endif()

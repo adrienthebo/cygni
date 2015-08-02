@@ -13,6 +13,12 @@ namespace Cygni {
             return false;
         }
 
+
+        virtual void set_pixel(int idx, int r, int g, int b) = 0;
+        virtual void set_pixel(int idx, int rgb) = 0;
+
+        virtual void clear() = 0;
+
         virtual int get_length() = 0;
     protected:
 
