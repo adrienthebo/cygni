@@ -8,6 +8,14 @@ namespace Cygni {
         uint8_t green;
         uint8_t blue;
 
+        RGB() : red(0), green(0), blue(0) { }
+
+        RGB(uint8_t r, uint8_t g, uint8_t b) : red(r), green(g), blue(b) { }
+
+        RGB(uint32_t rgb) {
+            from_int(rgb);
+        }
+
         bool operator==(const RGB &other) {
             return red == other.red && green == other.green && blue == other.blue;
         }
@@ -26,6 +34,12 @@ namespace Cygni {
             red   = ((uint32_t)red * (uint32_t)scale_by) >> 8;
             green = ((uint32_t)green * (uint32_t)scale_by) >> 8;
             blue  = ((uint32_t)blue * (uint32_t)scale_by) >> 8;
+        }
+
+        void from_int(uint32_t val) {
+            red   = (val & 0xFF0000) >> 16;
+            green = (val & 0x00FF00) >> 8;
+            blue  = (val & 0x0000FF);
         }
 
         uint32_t to_int() {

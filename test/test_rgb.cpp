@@ -3,6 +3,13 @@
 
 using namespace Cygni;
 
+SCENARIO("Converting from RGB int value") {
+    RGB value;
+    RGB expected = {0xFE, 0x56, 0x1A};
+    value.from_int(0xFE561A);
+    REQUIRE(value == expected);
+}
+
 SCENARIO("Converting to rgb int value") {
     RGB value = {0xF0, 0x7E, 0x0F};
     REQUIRE(value.to_int() == 0xF07E0F);
