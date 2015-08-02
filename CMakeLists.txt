@@ -25,8 +25,8 @@ else()
 
   add_teensy_library(cygni grid.cpp octo-driver.cpp)
 
-  add_teensy_executable(main exe/main.cpp grid.cpp)
-  target_link_libraries(main cygni OctoWS2811 teensy_core)
+  add_teensy_executable(burn-in exe/burn-in.cpp grid.cpp)
+  target_link_libraries(burn-in cygni OctoWS2811 teensy_core)
 
   add_teensy_executable(blink exe/blink.cpp)
   target_link_libraries(blink teensy_core)
