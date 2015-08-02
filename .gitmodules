@@ -10,3 +10,6 @@
 [submodule "vendor/OctoWS2811"]
 	path = vendor/OctoWS2811
 	url = git://github.com/PaulStoffregen/OctoWS2811
+[submodule "vendor/Bounce2"]
+	path = vendor/Bounce2
+	url = https://github.com/thomasfredericks/Bounce2

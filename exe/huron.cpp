@@ -1,8 +1,6 @@
 #include "platform.h"
 #include "pin13.h"
 #include "octo-driver.h"
-#include <Color.h>
-#include <Bounce.h>
 #include "effects/effect.h"
 #include "effects/shift.h"
 
