@@ -6,7 +6,7 @@ namespace Cygni {
     struct Hue {
         Hue() {
             _sat = 0.9;
-            _lum = 0.02;
+            _lum = 0.05;
         }
 
         Hue(float sat, float lum) {
