@@ -31,6 +31,9 @@ namespace Cygni {
             _pixels->setPixel(idx, rgb);
         }
 
+        uint32_t get_pixel(uint32_t idx) {
+            return _pixels->getPixel(idx);
+        }
 
         virtual void clear_pixel(int idx) {
             set_pixel(idx, 0, 0, 0);
@@ -41,7 +44,6 @@ namespace Cygni {
                 clear_pixel(idx);
             }
         }
-
 
         bool is_busy() {
             return _pixels->busy();
