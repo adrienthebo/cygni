@@ -38,6 +38,6 @@ else()
   target_link_libraries(octo-pin-steady teensy_core)
 
   add_teensy_executable(huron exe/huron.cpp grid.cpp vendor/OctoWS2811/OctoWS2811.cpp)
-  target_link_libraries(huron Color cygni OctoWS2811 teensy_core)
+  target_link_libraries(huron Color Bounce2 cygni OctoWS2811 teensy_core)
 
 endif()

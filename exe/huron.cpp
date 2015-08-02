@@ -3,6 +3,10 @@
 #include "octo-driver.h"
 #include "effects/effect.h"
 #include "effects/shift.h"
+#include "effects/zig.h"
+#include "effect-set.h"
+
+#include <Bounce2.h>
 
 #define STRIP_LENGTH 50
 #define MAX_PIXELS 50 * 8
@@ -10,11 +14,27 @@
 using namespace pin13;
 
 Cygni::OctoDriver *driver;
-Cygni::Shift dude;
+Cygni::EffectSet *es;
+
+Bounce button;
 
 void setup() {
+    /* Prepare debounced button */
+    pinMode(12, INPUT_PULLUP);
+    button.attach(12);
+    button.interval(5);
+
+    /* Initialize onboard LED */
     pinMode(13, OUTPUT);
     pulse13(5, 25);
+
+    /* Configure LEDs and effects */
+    Cygni::Effect *effects[] = {
+        new Cygni::Shift(),
+        new Cygni::Zig(),
+    };
+
+    es = new Cygni::EffectSet(2, effects);
 
     driver = new Cygni::OctoDriver(MAX_PIXELS, STRIP_LENGTH);
     driver->clear();
@@ -22,7 +42,12 @@ void setup() {
 }
 
 void loop() {
-    dude.apply(driver);
+    button.update();
+    if(button.fell()) {
+        es->next_effect();
+    }
+
+    es->apply(driver);
     driver->show(10);
     while(driver->is_busy());
 }
