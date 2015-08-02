@@ -14,3 +14,10 @@ SCENARIO("Fading") {
     value.fade(10);
     REQUIRE(value == expected);
 }
+
+SCENARIO("Scaling") {
+    RGB value = {0xFF, 0xF0, 0x0F};
+    RGB expected = {0x7F, 0x78, 0x07};
+    value.scale(128);
+    REQUIRE(value == expected);
+}

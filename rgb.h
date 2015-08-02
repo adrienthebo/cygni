@@ -18,6 +18,16 @@ namespace Cygni {
             blue  -= fade_by;
         }
 
+        /**
+         *
+         * @see https://github.com/FastLED/FastLED/blob/3.0.1/lib8tion.h#L705-L707
+         */
+        void scale(uint8_t scale_by) {
+            red   = ((uint32_t)red * (uint32_t)scale_by) >> 8;
+            green = ((uint32_t)green * (uint32_t)scale_by) >> 8;
+            blue  = ((uint32_t)blue * (uint32_t)scale_by) >> 8;
+        }
+
         uint32_t to_int() {
             return (red << 16) | (green << 8) | blue;
         }
