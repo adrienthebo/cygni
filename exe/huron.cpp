@@ -6,6 +6,7 @@
 #include "effects/zig.h"
 #include "effects/stutter.h"
 #include "effects/spin.h"
+#include "effects/chase.h"
 #include "effect-set.h"
 
 #include <Bounce2.h>
@@ -32,13 +33,14 @@ void setup() {
 
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
+        new Cygni::Chase(),
         new Cygni::Spin(),
         new Cygni::Stutter(),
         new Cygni::Zig(),
         new Cygni::Shift(),
     };
 
-    es = new Cygni::EffectSet(4, effects);
+    es = new Cygni::EffectSet(5, effects);
 
     driver = new Cygni::OctoDriver(MAX_PIXELS, STRIP_LENGTH);
     driver->clear();
