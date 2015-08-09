@@ -4,10 +4,7 @@
 
 namespace Cygni {
     struct Hue {
-        Hue() {
-            _sat = 0.9;
-            _lum = 0.05;
-        }
+        Hue() { }
 
         Hue(float sat, float lum) {
             _sat = sat;
@@ -15,13 +12,17 @@ namespace Cygni {
         }
 
         void next() {
-            _hue += 0.01;
+            _hue += _incr;
 
             if(_hue >= 1.0) {
                 _hue -= 1;
             }
 
             c.convert_hcl_to_rgb(_hue, _sat, _lum);
+        }
+
+        void set_incr(float incr) {
+            _incr = incr;
         }
 
         int red()   { return c.red; }
@@ -31,8 +32,11 @@ namespace Cygni {
     private:
 
         float _hue = 0.0;
-        float _sat;
-        float _lum;
+        float _sat = 0.9;
+        float _lum = 0.05;
+
+        float _incr = 0.01;
+
         Color c;
     };
 };
