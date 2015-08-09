@@ -34,7 +34,7 @@ void loop() {
         }
     }
 
-    driver->show(50);
+    driver->show(250);
     ++offset;
 
     if(offset >= 5) {
