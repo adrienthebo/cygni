@@ -4,6 +4,7 @@
 #include "effects/effect.h"
 #include "effects/shift.h"
 #include "effects/zig.h"
+#include "effects/stutter.h"
 #include "effect-set.h"
 
 #include <Bounce2.h>
@@ -30,11 +31,12 @@ void setup() {
 
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
-        new Cygni::Shift(),
+        new Cygni::Stutter(),
         new Cygni::Zig(),
+        new Cygni::Shift(),
     };
 
-    es = new Cygni::EffectSet(2, effects);
+    es = new Cygni::EffectSet(3, effects);
 
     driver = new Cygni::OctoDriver(MAX_PIXELS, STRIP_LENGTH);
     driver->clear();
