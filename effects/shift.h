@@ -17,7 +17,7 @@ namespace Cygni {
             Color c;
             float current_hue = _hue;
             for(int idx = 0; idx < driver->get_length(); idx++) {
-                current_hue += 0.02;
+                current_hue = next_hue(current_hue);
 
                 float current_lum = _lum;
                 if(_twinkle_probability % random(_twinkle_probability) == 0) {
@@ -49,7 +49,7 @@ namespace Cygni {
         float _sat = 0.8;
         float _lum = 0.05;
 
-        int _twinkle_probability = 1000;
+        int _twinkle_probability = 5000;
         int _unsat_probability = 5000;
     };
 };
