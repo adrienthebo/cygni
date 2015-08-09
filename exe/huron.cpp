@@ -52,6 +52,7 @@ void setup() {
 void loop() {
     button.update();
     if(button.fell()) {
+        driver->clear();
         es->next_effect();
     }
 
