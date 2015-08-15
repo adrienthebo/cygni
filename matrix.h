@@ -41,27 +41,11 @@ namespace Cygni {
             Vector<T>::set(x + (y * _width), value);
         }
 
-        /** Forwarded methods to Vector<T> */
-
-        T * get(uint32_t offset) {
-            return Vector<T>::get(offset);
-        }
-
-        void set(uint32_t offset, T value) {
-            Vector<T>::set(offset, value);
-        }
-
-        bool is_valid_offset(uint32_t offset) {
-            return Vector<T>::is_valid_offset(offset);
-        }
-
-        T * begin() {
-            return Vector<T>::begin();
-        }
-
-        T * end() {
-            return Vector<T>::end();
-        }
+        using Vector<T>::get;
+        using Vector<T>::set;
+        using Vector<T>::is_valid_offset;
+        using Vector<T>::begin;
+        using Vector<T>::end;
 
     private:
 
