@@ -10,7 +10,7 @@ namespace Cygni {
         virtual void apply() {
             Color c;
             float current_hue = _hue;
-            for(int idx = 0; idx < _output.size(); idx++) {
+            for(uint32_t idx = 0; idx < _output.size(); idx++) {
                 current_hue = next_hue(current_hue);
 
                 float current_lum = _lum;
