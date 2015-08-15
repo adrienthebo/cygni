@@ -1,5 +1,4 @@
 #pragma once
-#include <drivers/driver.h>
 #include <effects/effect.h>
 #include <grid.h>
 #include <hue.h>
@@ -14,15 +13,15 @@ namespace Cygni {
             _hue = Hue();
         }
 
-        void apply(Driver *driver) {
-            scale(driver);
+        void apply() {
+            scale();
 
             _hue.next();
 
             if(move()) {
-                driver->set_pixel(_cur_idx, 0xFFFFFF);
+                _output.set_pixel(_cur_idx, 0xFFFFFF);
             } else {
-                driver->set_pixel(_cur_idx, _hue.red(), _hue.green(), _hue.blue());
+                _output.set_pixel(_cur_idx, _hue.red(), _hue.green(), _hue.blue());
             }
         }
 
@@ -43,12 +42,12 @@ namespace Cygni {
 
     private:
 
-        void scale(Driver *driver) {
+        void scale() {
             RGB tmp;
             for(int i = 0; i < 50; i++) {
-                tmp.from_int(driver->get_pixel(i));
+                tmp.from_int(_output.get_pixel(i));
                 tmp.scale(240);
-                driver->set_pixel(i, tmp.to_int());
+                _output.set_pixel(i, tmp.to_int());
             }
         }
 

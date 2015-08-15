@@ -1,5 +1,4 @@
 #pragma once
-#include <drivers/driver.h>
 #include <effects/effect.h>
 #include <grid.h>
 #include <Color.h>
@@ -20,7 +19,7 @@ namespace Cygni {
             cycle();
         }
 
-        void apply(Driver *driver) {
+        void apply() {
             if(--_indices_duration <= 0) {
                 /* We're selecting a new set of indices. Reduce the brightness
                  * of the currently selected indices to reduce power
@@ -28,7 +27,7 @@ namespace Cygni {
                  * and boost the saturation of the current indices to reduce
                  * the low sat Easter effect.
                  */
-                wipe_indices(driver, _hue, _sat + 0.15, _lum * 0.25);
+                wipe_indices(_hue, _sat + 0.15, _lum * 0.25);
                 set_indices();
                 set_color();
             }
@@ -38,7 +37,7 @@ namespace Cygni {
             }
 
             cycle();
-            wipe_indices(driver, _hue, _sat, _lum);
+            wipe_indices(_hue, _sat, _lum);
         }
 
 
@@ -53,12 +52,12 @@ namespace Cygni {
 
         Color c;
 
-        void wipe_indices(Driver *driver, float hue, float sat, float lum) {
+        void wipe_indices(float hue, float sat, float lum) {
             Color c;
             c.convert_hcl_to_rgb(hue, sat, lum);
             for(int i = 0; i < _indices_size; i++) {
                 uint32_t idx = _indices[i];
-                driver->set_pixel(idx, c.red, c.green, c.blue);
+                _output.set_pixel(idx, c.red, c.green, c.blue);
             }
         }
 

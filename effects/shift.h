@@ -1,5 +1,4 @@
 #pragma once
-#include <drivers/driver.h>
 #include "effect.h"
 #include <Color.h>
 
@@ -8,10 +7,10 @@ namespace Cygni {
 
         Shift(Output &output) : Effect(output) {}
 
-        virtual void apply(Cygni::Driver *driver) {
+        virtual void apply() {
             Color c;
             float current_hue = _hue;
-            for(int idx = 0; idx < driver->get_length(); idx++) {
+            for(int idx = 0; idx < _output.size(); idx++) {
                 current_hue = next_hue(current_hue);
 
                 float current_lum = _lum;
@@ -26,7 +25,7 @@ namespace Cygni {
                 }
 
                 c.convert_hcl_to_rgb(current_hue, current_sat, current_lum);
-                driver->set_pixel(idx, c.red, c.green, c.blue);
+                _output.set_pixel(idx, c.red, c.green, c.blue);
             }
             _hue = next_hue(_hue);
         }

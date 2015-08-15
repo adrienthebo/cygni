@@ -1,5 +1,4 @@
 #pragma once
-#include <drivers/driver.h>
 #include "effect.h"
 #include <Color.h>
 #include <util.h>
@@ -42,7 +41,7 @@ namespace Cygni {
             }
         }
 
-        void apply(Driver *driver) {
+        void apply() {
             Color c;
 
             for(uint32_t i = 0; i < _size; i++) {
@@ -50,7 +49,7 @@ namespace Cygni {
 
                 c.convert_hcl_to_rgb(0.6, d.get_sat(), d.get_lum());
 
-                driver->set_pixel(d._idx, c.red, c.green, c.blue);
+                _output.set_pixel(d._idx, c.red, c.green, c.blue);
 
                 if(d._level <= 0.01) {
                     d._idx = random(50);

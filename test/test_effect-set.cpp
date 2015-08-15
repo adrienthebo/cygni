@@ -23,7 +23,7 @@ struct DummyOutput : Output {
 struct DummyEffect : Effect {
     DummyEffect(Output &o) : Effect(o) {}
 
-    void apply(Cygni::Driver *driver) { applied = true; }
+    void apply() { applied = true; }
     bool applied = false;
 };
 

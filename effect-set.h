@@ -29,8 +29,8 @@ namespace Cygni {
             return _index;
         }
 
-        void apply(Driver *driver) {
-            current()->apply(driver);
+        void apply() {
+            current()->apply();
         }
 
     private:

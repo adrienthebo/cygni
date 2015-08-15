@@ -65,7 +65,7 @@ void loop() {
         es->next_effect();
     }
 
-    es->apply(driver);
+    es->apply();
     driver->show(10);
     while(driver->is_busy());
 }

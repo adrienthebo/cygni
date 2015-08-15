@@ -7,7 +7,7 @@ namespace Cygni {
     struct Effect {
         Effect(Output &output) : _output(output) { }
 
-        virtual void apply(Cygni::Driver *driver) = 0;
+        virtual void apply() = 0;
 
     protected:
 

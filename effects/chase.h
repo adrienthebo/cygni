@@ -1,5 +1,4 @@
 #pragma once
-#include <drivers/driver.h>
 #include "effect.h"
 #include <Color.h>
 #include <hue.h>
@@ -9,12 +8,12 @@ namespace Cygni {
 
         Chase(Output &output) : Effect(output) {}
 
-        void apply(Driver *driver) {
+        void apply() {
             if(++_delay % 5 != 0) {
                 return;
             }
 
-            scale(driver);
+            scale();
 
             uint32_t distance = 50 / _count;
 
@@ -25,7 +24,7 @@ namespace Cygni {
                 c.convert_hcl_to_rgb(hue, _sat, _lum);
 
                 uint32_t idx = m_index(_counter + (i * distance));
-                driver->set_pixel(idx, c.red, c.green, c.blue);
+                _output.set_pixel(idx, c.red, c.green, c.blue);
             }
             ++_counter;
         }
@@ -44,12 +43,12 @@ namespace Cygni {
         uint32_t _counter = 0;
         uint32_t _delay = 0;
 
-        void scale(Driver *driver) {
+        void scale() {
             RGB tmp;
             for(int i = 0; i < 50; i++) {
-                tmp.from_int(driver->get_pixel(i));
+                tmp.from_int(_output.get_pixel(i));
                 tmp.scale(192);
-                driver->set_pixel(i, tmp.to_int());
+                _output.set_pixel(i, tmp.to_int());
             }
         }
     };
