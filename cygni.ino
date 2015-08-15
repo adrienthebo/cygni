@@ -5,7 +5,7 @@
 #endif
 
 #include "platform.h"
-#include "octo-driver.h"
+#include <drivers/octo-driver.h>
 #include "grid.h"
 
 Cygni::OctoDriver *driver;

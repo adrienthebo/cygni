@@ -1,4 +1,4 @@
-#include "octo-driver.h"
+#include <drivers/octo-driver.h>
 
 namespace Cygni {
     OctoDriver::OctoDriver(int length, int strip_length) : OctoDriver(length, strip_length, WS2811_RGB) { }

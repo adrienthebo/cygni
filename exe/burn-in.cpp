@@ -1,6 +1,6 @@
 #include "platform.h"
 #include "pin13.h"
-#include "octo-driver.h"
+#include <drivers/octo-driver.h>
 
 #define STRIP_LENGTH 50
 #define MAX_PIXELS 50 * 8

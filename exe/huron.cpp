@@ -1,6 +1,6 @@
 #include "platform.h"
 #include "pin13.h"
-#include "octo-driver.h"
+#include <drivers/octo-driver.h>
 #include "effects/effect.h"
 #include "effects/shift.h"
 #include "effects/zig.h"
