@@ -63,7 +63,7 @@ namespace Cygni {
 
         void set_indices() {
             for(int i = 0; i < _indices_size; i++) {
-                _indices[i] = random(50);
+                _indices[i] = random(_output.size());
             }
             _indices_duration = multirandom(100, 3);
         }

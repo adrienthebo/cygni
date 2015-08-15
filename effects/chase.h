@@ -15,7 +15,7 @@ namespace Cygni {
 
             scale();
 
-            uint32_t distance = 50 / _count;
+            uint32_t distance = _output.size() / _count;
 
             float hue = 0.0;
             for(uint32_t i = 0; i < _count; i++) {
@@ -37,7 +37,7 @@ namespace Cygni {
         uint32_t _count = 6;
 
         uint32_t m_index(uint32_t in) {
-            return in % 50;
+            return in % _output.size();
         }
 
         uint32_t _counter = 0;
@@ -45,7 +45,7 @@ namespace Cygni {
 
         void scale() {
             RGB tmp;
-            for(int i = 0; i < 50; i++) {
+            for(uint32_t i = 0; i < _output.size(); i++) {
                 tmp.from_int(_output.get_pixel(i));
                 tmp.scale(192);
                 _output.set_pixel(i, tmp.to_int());

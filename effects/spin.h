@@ -11,7 +11,7 @@ namespace Cygni {
         }
 
         void apply() {
-            uint32_t idx = ++_counter % 50;
+            uint32_t idx = ++_counter % _output.size();
 
             _output.set_pixel(idx, _h.red(), _h.green(), _h.blue());
 
@@ -28,7 +28,7 @@ namespace Cygni {
 
         void scale() {
             RGB tmp;
-            for(int i = 0; i < 50; i++) {
+            for(uint32_t i = 0; i < _output.size(); i++) {
                 tmp.from_int(_output.get_pixel(i));
                 tmp.scale(240);
                 _output.set_pixel(i, tmp.to_int());

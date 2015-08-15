@@ -7,8 +7,8 @@ namespace Cygni {
     struct Zig : Effect {
 
         Zig(Output &output) : Effect(output) {
-            _cur_idx = random(50);
-            _tgt_idx = random(50);
+            _cur_idx = random(_output.size());
+            _tgt_idx = random(_output.size());
             _ctr = 0;
             _hue = Hue();
         }
@@ -34,7 +34,7 @@ namespace Cygni {
             } else if(_tgt_idx < _cur_idx) {
                 --_cur_idx;
             } else {
-                _tgt_idx = random(50);
+                _tgt_idx = random(_output.size());
                 return true;
             }
             return false;
@@ -44,7 +44,7 @@ namespace Cygni {
 
         void scale() {
             RGB tmp;
-            for(int i = 0; i < 50; i++) {
+            for(uint32_t i = 0; i < _output.size(); i++) {
                 tmp.from_int(_output.get_pixel(i));
                 tmp.scale(240);
                 _output.set_pixel(i, tmp.to_int());

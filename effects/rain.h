@@ -37,7 +37,7 @@ namespace Cygni {
 
         Rain(Output &output) : Effect(output) {
             for(uint32_t i = 0; i < _size; i++) {
-                _drops[i]._idx = random(50);
+                _drops[i]._idx = random(output.size());
             }
         }
 
@@ -52,7 +52,7 @@ namespace Cygni {
                 _output.set_pixel(d._idx, c.red, c.green, c.blue);
 
                 if(d._level <= 0.01) {
-                    d._idx = random(50);
+                    d._idx = random(_output.size());
                 }
                 d.next();
             }
