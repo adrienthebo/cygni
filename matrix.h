@@ -53,5 +53,3 @@ namespace Cygni {
         uint32_t _height;
     };
 }; 
-   
-   

@@ -7,7 +7,7 @@
 namespace Cygni {
     struct Zig : Effect {
 
-        Zig() {
+        Zig(Output &output) : Effect(output) {
             _cur_idx = random(50);
             _tgt_idx = random(50);
             _ctr = 0;

@@ -1,6 +1,9 @@
 #include "platform.h"
 #include "pin13.h"
+
 #include <drivers/octo-driver.h>
+#include <outputs/octo-output.h>
+
 #include "effects/effect.h"
 #include "effects/shift.h"
 #include "effects/zig.h"
@@ -18,6 +21,7 @@
 using namespace pin13;
 
 Cygni::OctoDriver *driver;
+Cygni::Output *output;
 Cygni::EffectSet *es;
 
 Bounce button;
@@ -32,21 +36,26 @@ void setup() {
     pinMode(13, OUTPUT);
     pulse13(5, 25);
 
+    driver = new Cygni::OctoDriver(MAX_PIXELS, STRIP_LENGTH);
+    driver->clear();
+    driver->show();
+
+    output = new Cygni::OctoOutput(*driver, 50, 1);
+
+    Cygni::Output &q = *output;
+
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
-        new Cygni::Rain(),
-        new Cygni::Chase(),
-        new Cygni::Spin(),
-        new Cygni::Stutter(),
-        new Cygni::Zig(),
-        new Cygni::Shift(),
+        new Cygni::Rain(q),
+        new Cygni::Chase(q),
+        new Cygni::Spin(q),
+        new Cygni::Stutter(q),
+        new Cygni::Zig(q),
+        new Cygni::Shift(q),
     };
 
     es = new Cygni::EffectSet(6, effects);
 
-    driver = new Cygni::OctoDriver(MAX_PIXELS, STRIP_LENGTH);
-    driver->clear();
-    driver->show();
 }
 
 void loop() {

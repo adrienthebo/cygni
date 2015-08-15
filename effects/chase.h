@@ -7,6 +7,8 @@
 namespace Cygni {
     struct Chase : Cygni::Effect {
 
+        Chase(Output &output) : Effect(output) {}
+
         void apply(Driver *driver) {
             if(++_delay % 5 != 0) {
                 return;

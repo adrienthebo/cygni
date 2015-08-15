@@ -36,7 +36,7 @@ namespace Cygni {
 
     struct Rain : Cygni::Effect {
 
-        Rain() {
+        Rain(Output &output) : Effect(output) {
             for(uint32_t i = 0; i < _size; i++) {
                 _drops[i]._idx = random(50);
             }

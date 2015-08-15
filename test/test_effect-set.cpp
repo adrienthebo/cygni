@@ -1,9 +1,28 @@
 #include <catch.hpp>
+
+#include <effects/effect.h>
+#include <outputs/output.h>
+#include <drivers/driver.h>
+
 #include "effect-set.h"
 
 using namespace Cygni;
 
+struct DummyOutput : Output {
+    DummyOutput() { }
+    void set_pixel(int idx, int r, int g, int b) { };
+    void set_pixel(int idx, int rgb) { };
+
+    uint32_t get_pixel(uint32_t idx) { return 0; }
+
+    uint32_t size() { return 0; }
+    uint32_t width() { return 0; }
+    uint32_t height() { return 0; }
+};
+
 struct DummyEffect : Effect {
+    DummyEffect(Output &o) : Effect(o) {}
+
     void apply(Cygni::Driver *driver) { applied = true; }
     bool applied = false;
 };
@@ -14,7 +33,11 @@ SCENARIO("Initialize effect set") {
 }
 
 SCENARIO("Incrementing the effect index") {
-    DummyEffect d0, d1;
+    DummyOutput o;
+
+    DummyEffect d0(o);
+    DummyEffect d1(o);
+
     Effect *effects[] = {&d0, &d1};
 
     EffectSet es(2, effects);

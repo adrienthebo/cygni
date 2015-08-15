@@ -14,7 +14,7 @@ namespace Cygni {
         static const uint8_t _indices_size = 10;
         uint32_t _indices[_indices_size];
 
-        Stutter() {
+        Stutter(Output &output) : Effect(output) {
             set_indices();
             set_color();
             cycle();

@@ -7,7 +7,7 @@
 namespace Cygni {
     struct Spin : Cygni::Effect {
 
-        Spin() {
+        Spin(Output &output) : Effect(output) {
             _h.set_incr(0.001);
         }
 

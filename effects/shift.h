@@ -6,12 +6,7 @@
 namespace Cygni {
     struct Shift : Cygni::Effect {
 
-        Shift() {}
-
-        Shift(float sat, float lum) {
-            _sat = sat;
-            _lum = lum;
-        }
+        Shift(Output &output) : Effect(output) {}
 
         virtual void apply(Cygni::Driver *driver) {
             Color c;
