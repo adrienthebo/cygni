@@ -17,7 +17,7 @@ namespace Cygni {
         uint32_t _idx;
         float _level;
 
-        void next() {
+        void fade() {
             _level -= 0.01;
             if(_level <= 0.0) {
                 _level += 1.0;
@@ -54,7 +54,7 @@ namespace Cygni {
                 if(d._level <= 0.01) {
                     d._idx = random(_output.size());
                 }
-                d.next();
+                d.fade();
             }
         }
 
