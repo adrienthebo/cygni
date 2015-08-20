@@ -27,6 +27,9 @@ Cygni::EffectSet *es;
 Bounce button;
 
 void setup() {
+
+    srand(analogRead(0));
+
     /* Prepare debounced button */
     pinMode(12, INPUT_PULLUP);
     button.attach(12);
