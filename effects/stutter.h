@@ -65,7 +65,7 @@ namespace Cygni {
             for(int i = 0; i < _indices_size; i++) {
                 _indices[i] = random(_output.size());
             }
-            _indices_duration = multirandom(100, 3);
+            _indices_duration = multirandom(50, 4);
         }
 
         void set_color() {
@@ -74,7 +74,7 @@ namespace Cygni {
         }
 
         void cycle() {
-            _cycle_duration = 1 + multirandom(20, 2);
+            _cycle_duration = 1 + multirandom(20, 3);
             _lum = randomf(0.1);
         }
     };
