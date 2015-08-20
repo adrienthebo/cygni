@@ -20,7 +20,7 @@ namespace Cygni {
         void fade() {
             _level -= 0.01;
             if(_level <= 0.0) {
-                _level += 1.0 - randomf(0.5);
+                _level += 1.0 - randomf(0.75);
             }
         }
 
@@ -52,6 +52,7 @@ namespace Cygni {
                 _output.set_pixel(d._idx, c.red, c.green, c.blue);
 
                 if(d._level <= 0.01) {
+                    _output.clear_pixel(d._idx);
                     d._idx = random(_output.size());
                 }
                 d.fade();
