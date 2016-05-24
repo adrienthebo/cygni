@@ -32,8 +32,8 @@ void setup() {
     srand(analogRead(0));
 
     /* Prepare debounced button */
-    pinMode(12, INPUT_PULLUP);
-    button.attach(12);
+    pinMode(23, INPUT_PULLUP);
+    button.attach(23);
     button.interval(5);
 
     /* Initialize onboard LED */
