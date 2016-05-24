@@ -3,7 +3,7 @@
 ################################################################################
 # Arduino configuration
 
-set(ARDUINO_ROOT "/home/adrien/local/opt/arduino/1.6.1")
+set(ARDUINO_ROOT "/usr/share/arduino")
 set(ARDUINO_VERSION "161" CACHE STRING "Version of the Arduino SDK")
 add_definitions("-DARDUINO=${ARDUINO_VERSION}")
 
