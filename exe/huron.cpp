@@ -12,6 +12,7 @@
 #include "effects/chase.h"
 #include "effects/rain.h"
 #include "effects/perseids.h"
+#include "effects/willow.h"
 #include "effect-set.h"
 
 #include <Bounce2.h>
@@ -50,6 +51,7 @@ void setup() {
 
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
+        new Cygni::Willow(q),
         new Cygni::Perseids(q),
         new Cygni::Rain(q),
         new Cygni::Chase(q),
@@ -59,7 +61,7 @@ void setup() {
         new Cygni::Shift(q),
     };
 
-    es = new Cygni::EffectSet(7, effects);
+    es = new Cygni::EffectSet(8, effects);
 }
 
 void loop() {
