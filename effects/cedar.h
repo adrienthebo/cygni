@@ -5,10 +5,10 @@
 
 namespace Cygni {
 
-    struct WillowLeaf {
+    struct CedarLeaf {
 
-        WillowLeaf() :
-            _hue(0.55, 0.9, 0.0005),
+        CedarLeaf() :
+            _hue(0.3, 0.7, 0.0005),
             _lum(0.0, 0.05, 0.0005, 0.0)
         {}
 
@@ -35,8 +35,8 @@ namespace Cygni {
         BoundedRand<float> _lum;
     };
 
-    struct Willow : public Cygni::Trunk<WillowLeaf> {
-        Willow(Output &output) : Cygni::Trunk<WillowLeaf>(output)
+    struct Cedar : public Cygni::Trunk<CedarLeaf> {
+        Cedar(Output &output) : Cygni::Trunk<CedarLeaf>(output)
         {}
     };
 };

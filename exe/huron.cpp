@@ -12,7 +12,10 @@
 #include "effects/chase.h"
 #include "effects/rain.h"
 #include "effects/perseids.h"
+#include "effects/cedar.h"
 #include "effects/willow.h"
+#include "effects/nightsky.h"
+#include "effects/spectrum.h"
 #include "effect-set.h"
 
 #include <Bounce2.h>

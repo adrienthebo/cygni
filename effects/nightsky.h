@@ -5,24 +5,22 @@
 
 namespace Cygni {
 
-    struct WillowLeaf {
+    struct Star {
 
-        WillowLeaf() :
-            _hue(0.55, 0.9, 0.0005),
-            _lum(0.0, 0.05, 0.0005, 0.0)
+        Star() :
+            _lum(0.0, 0.05, 0.001, 0.0)
         {}
 
         void step() {
-            _hue.step();
             _lum.step();
         }
 
         float hue() {
-           return _hue.val;
+           return 0.0;
         } 
 
         float sat() {
-            return 0.9;
+            return 0.0;
         }
 
         float lum() {
@@ -31,12 +29,12 @@ namespace Cygni {
 
     private:
 
-        BoundedRand<float> _hue;
         BoundedRand<float> _lum;
     };
 
-    struct Willow : public Cygni::Trunk<WillowLeaf> {
-        Willow(Output &output) : Cygni::Trunk<WillowLeaf>(output)
+    struct NightSky : public Cygni::Trunk<Star> {
+        NightSky(Output &output) : Cygni::Trunk<Star>(output)
         {}
     };
 };
+
