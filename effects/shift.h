@@ -21,7 +21,7 @@ namespace Cygni {
                 float current_sat = _sat;
                 if(_unsat_probability % random(_unsat_probability) == 0) {
                     current_sat = 0.0;
-                    current_lum = 0.5;
+                    current_lum /= 2;
                 }
 
                 c.convert_hcl_to_rgb(current_hue, current_sat, current_lum);
@@ -35,7 +35,7 @@ namespace Cygni {
 
 
         float next_hue(float in) {
-            float sum = in + 0.02;
+            float sum = in + 0.01;
             return sum >= 1.0 ? sum - 1.0 : sum;
         }
 
@@ -43,7 +43,7 @@ namespace Cygni {
         float _sat = 0.8;
         float _lum = 0.05;
 
-        int _twinkle_probability = 5000;
-        int _unsat_probability = 5000;
+        int _twinkle_probability = 100000;
+        int _unsat_probability = 25000;
     };
 };

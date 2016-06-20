@@ -18,7 +18,7 @@ namespace Cygni {
         float _level;
 
         void fade() {
-            _level -= 0.01;
+            _level -= 0.004;
             if(_level <= 0.0) {
                 _level += 1.0 - randomf(0.75);
             }
