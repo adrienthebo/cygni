@@ -1,5 +1,5 @@
 #pragma once
-#include <effects/effect.hpp>
+#include <cygni/effects/trunk.hpp>
 #include <grid.h>
 #include <hue.h>
 

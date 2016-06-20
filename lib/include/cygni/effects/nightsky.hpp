@@ -1,6 +1,6 @@
 #pragma once
 
-#include "effects/trunk.hpp"
+#include <cygni/effects/trunk.hpp>
 #include "boundedrand.h"
 
 namespace Cygni {
