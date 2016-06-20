@@ -1,5 +1,5 @@
 #include "platform.h"
-#include "effects/effect.h"
+#include "effects/effect.hpp"
 
 namespace Cygni {
     struct EffectSet {

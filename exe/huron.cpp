@@ -4,18 +4,18 @@
 #include <drivers/octo-driver.h>
 #include <outputs/octo-output.h>
 
-#include "effects/effect.h"
-#include "effects/shift.h"
-#include "effects/zig.h"
-#include "effects/stutter.h"
-#include "effects/spin.h"
-#include "effects/chase.h"
-#include "effects/rain.h"
-#include "effects/perseids.h"
-#include "effects/cedar.h"
-#include "effects/willow.h"
-#include "effects/nightsky.h"
-#include "effects/spectrum.h"
+#include "effects/effect.hpp"
+#include "effects/shift.hpp"
+#include "effects/zig.hpp"
+#include "effects/stutter.hpp"
+#include "effects/spin.hpp"
+#include "effects/chase.hpp"
+#include "effects/rain.hpp"
+#include "effects/perseids.hpp"
+#include "effects/cedar.hpp"
+#include "effects/willow.hpp"
+#include "effects/nightsky.hpp"
+#include "effects/spectrum.hpp"
 #include "effect-set.h"
 
 #include <Bounce2.h>

@@ -2,6 +2,7 @@
 #include <drivers/driver.h>
 
 #include <outputs/output.h>
+#include <cygni/environment.hpp>
 
 namespace Cygni {
     struct Effect {

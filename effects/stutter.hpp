@@ -1,5 +1,5 @@
 #pragma once
-#include <effects/effect.h>
+#include <effects/effect.hpp>
 #include <grid.h>
 #include <Color.h>
 #include <util.h>

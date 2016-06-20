@@ -2,7 +2,7 @@
 #include <Color.h>
 
 #include <util.h>
-#include "effect.h"
+#include "effect.hpp"
 
 namespace Cygni {
 
