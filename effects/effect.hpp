@@ -10,6 +10,9 @@ namespace Cygni {
 
         virtual void apply() = 0;
 
+        // TODO: make env const?
+        virtual void call(Environment & env) = 0;
+
     protected:
 
         Output &_output;

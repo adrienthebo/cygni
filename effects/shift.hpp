@@ -1,7 +1,11 @@
 #pragma once
-#include "effect.h"
+#include "effect.hpp"
 #include <Color.h>
 
+/**
+ * Rotate over the hue spectrum over a length of LEDs, creating
+ * a rippling color effect.
+ */
 namespace Cygni {
     struct Shift : Cygni::Effect {
 
@@ -30,6 +34,7 @@ namespace Cygni {
             _hue = next_hue(_hue);
         }
 
+        void call(Environment & env) { apply(); }
     protected:
 
 

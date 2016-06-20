@@ -40,6 +40,7 @@ namespace Cygni {
             wipe_indices(_hue, _sat, _lum);
         }
 
+        void call(Environment & env) { apply(); }
 
     private:
 

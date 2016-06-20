@@ -115,6 +115,8 @@ namespace Cygni {
             _output.set_pixel(step_to, c.red, c.green, c.blue);
         }
 
+        void call(Environment & env) { apply(); }
+
     private:
 
         // TODO STOP COPY/PASTING THIS GODDAMMIT

@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 project(Cygni)
 
 include_directories(.)
-
+include_directories("lib/include")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_library(cygni grid.cpp)

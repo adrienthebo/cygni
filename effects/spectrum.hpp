@@ -31,6 +31,7 @@ namespace Cygni {
             }
         }
 
+        void call(Environment & env) { apply(); }
     protected:
 
         float next_hue(float in) {

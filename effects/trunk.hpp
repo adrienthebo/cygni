@@ -24,6 +24,8 @@ namespace Cygni {
             }
         };
 
+        void call(Environment & env) { apply(); }
+
         T *nodes;
     };
 };

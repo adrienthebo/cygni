@@ -29,6 +29,10 @@ namespace Cygni {
             ++_counter;
         }
 
+        void call(Environment & env) {
+            apply();
+        }
+
     private:
 
         float _sat = 0.9;

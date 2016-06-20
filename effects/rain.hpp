@@ -59,6 +59,7 @@ namespace Cygni {
             }
         }
 
+        void call(Environment & env) { apply(); }
     private:
 
         static constexpr uint32_t _size = 10;

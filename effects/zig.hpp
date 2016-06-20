@@ -25,6 +25,8 @@ namespace Cygni {
             }
         }
 
+        void call(Environment & env) { apply(); }
+
         /**
          * Returns true if we've reached our destination, false otherwise.
          */

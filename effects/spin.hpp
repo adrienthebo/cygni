@@ -21,6 +21,7 @@ namespace Cygni {
             _h.next();
         }
 
+        void call(Environment & env) { apply(); }
     private:
 
         uint32_t _counter = 0;
