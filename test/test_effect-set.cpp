@@ -1,6 +1,6 @@
 #include <catch.hpp>
 
-#include <effects/effect.h>
+#include <effects/effect.hpp>
 #include <outputs/output.h>
 #include <drivers/driver.h>
 
