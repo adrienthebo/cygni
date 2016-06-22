@@ -3,7 +3,7 @@
 
 namespace Cygni {
     struct Hue : HCL {
-        Hue() { }
+        Hue() : HCL(0.0, 0.9, 0.05) { }
 
         void next() {
             _hue += _incr;
@@ -13,7 +13,7 @@ namespace Cygni {
             _incr = clamp(incr);
         }
 
-    private:
+    protected:
 
         float _incr = 0.01;
     };

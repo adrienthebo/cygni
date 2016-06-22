@@ -1,7 +1,7 @@
 #pragma once
 #include "effect.hpp"
 #include <Color.h>
-#include <hue.h>
+#include <cygni/hue.hpp>
 
 namespace Cygni {
     struct Chase : Cygni::Effect {

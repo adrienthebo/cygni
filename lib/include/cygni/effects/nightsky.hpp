@@ -15,16 +15,9 @@ namespace Cygni {
             _lum.step();
         }
 
-        float hue() {
-           return 0.0;
-        } 
-
-        float sat() {
-            return 0.0;
-        }
-
-        float lum() {
-            return _lum.val;
+        uint32_t to_int() const {
+            HCL hcl { 0.0, 0.0, _lum.val };
+            return hcl.to_int();
         }
 
     private:

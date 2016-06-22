@@ -1,6 +1,6 @@
 #pragma once
-#include <Color.h>
 
+#include <cygni/hcl.hpp>
 #include <util.h>
 #include "effect.hpp"
 
@@ -14,13 +14,10 @@ namespace Cygni {
         }
 
         virtual void apply() {
-            Color c;
-
             for(uint32_t i = 0, size = _output.size(); i < size; ++i) {
                 T &node = nodes[i];
                 node.step();
-                c.convert_hcl_to_rgb(node.hue(), node.sat(), node.lum());
-                _output.set_pixel(i, c.red, c.green, c.blue);
+                _output.set_pixel(i, node.to_int());
             }
         };
 

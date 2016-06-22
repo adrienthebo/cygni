@@ -1,7 +1,7 @@
 #pragma once
 #include <cygni/effects/trunk.hpp>
+#include <cygni/hue.hpp>
 #include <grid.h>
-#include <hue.h>
 
 namespace Cygni {
     struct Zig : Effect {
