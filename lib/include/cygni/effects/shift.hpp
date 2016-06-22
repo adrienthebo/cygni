@@ -1,6 +1,6 @@
 #pragma once
 #include "effect.hpp"
-#include <Color.h>
+#include <cygni/hue.hpp>
 
 /**
  * Rotate over the hue spectrum over a length of LEDs, creating
@@ -9,44 +9,35 @@
 namespace Cygni {
     struct Shift : Cygni::Effect {
 
-        Shift(Output &output) : Effect(output) {}
+        Shift(Output &output) : Effect(output) {
+            _hue.clamp_chroma(0.8);
+            _hue.set_incr(0.003);
+        }
 
         virtual void apply() {
-            Color c;
-            float current_hue = _hue;
+            Hue current(_hue);
+            current.set_incr(0.02);
             for(uint32_t idx = 0; idx < _output.size(); idx++) {
-                current_hue = next_hue(current_hue);
-
-                float current_lum = _lum;
+                Hue glittered(current);
                 if(_twinkle_probability % random(_twinkle_probability) == 0) {
-                    current_lum *= 2;
+                    glittered.clamp_lum(current.lum() * 2);
                 }
 
-                float current_sat = _sat;
                 if(_unsat_probability % random(_unsat_probability) == 0) {
-                    current_sat = 0.0;
-                    current_lum /= 2;
+                    glittered.clamp_chroma(0.0);
+                    glittered.clamp_chroma(current.chroma() / 2);
                 }
 
-                c.convert_hcl_to_rgb(current_hue, current_sat, current_lum);
-                _output.set_pixel(idx, c.red, c.green, c.blue);
+                _output.set_pixel(idx, glittered.to_int());
+                current.next();
             }
-            _hue = next_hue(_hue);
+            _hue.next();
         }
 
         void call(Environment & env) { apply(); }
     protected:
 
-
-
-        float next_hue(float in) {
-            float sum = in + 0.01;
-            return sum >= 1.0 ? sum - 1.0 : sum;
-        }
-
-        float _hue = 0.0;
-        float _sat = 0.8;
-        float _lum = 0.05;
+        Hue _hue;
 
         int _twinkle_probability = 100000;
         int _unsat_probability = 25000;

@@ -5,6 +5,10 @@ namespace Cygni {
     struct Hue : HCL {
         Hue() : HCL(0.0, 0.9, 0.05) { }
 
+        Hue(const Hue & rhs) : HCL(rhs) {
+            _incr = rhs._incr;
+        }
+
         void next() {
             clamp_hue_by(_incr);
         }
