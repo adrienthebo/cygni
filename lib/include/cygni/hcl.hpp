@@ -74,12 +74,11 @@ struct HCL : Pixel {
         return rv;
     }
 
+    private:
+
     float _hue = 0;
     float _chroma = 0;
     float _lum = 0;
-
-
-    private:
 
     float magic_float_normalize(const float in, const float magic1, const float magic2) const {
         float rv;

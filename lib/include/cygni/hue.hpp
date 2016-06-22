@@ -6,7 +6,12 @@ namespace Cygni {
         Hue() : HCL(0.0, 0.9, 0.05) { }
 
         void next() {
-            _hue += _incr;
+            clamp_hue_by(_incr);
+        }
+
+        // TODO: PICK A NAME FOR THIS SORT OF THING
+        inline void step() {
+            next();
         }
 
         void set_incr(float incr) {

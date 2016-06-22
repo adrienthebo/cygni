@@ -21,7 +21,9 @@ namespace Cygni {
             }
         };
 
-        void call(Environment & env) { apply(); }
+        virtual void call(Environment & env) { apply(); }
+
+        protected:
 
         T *nodes;
     };

@@ -43,6 +43,7 @@ void setup() {
 
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
+        new Cygni::Periodic(q),
         new Cygni::Spectrum(q),
         new Cygni::Shift(q),
         new Cygni::Spin(q),
@@ -56,7 +57,7 @@ void setup() {
         new Cygni::Perseids(q),
     };
 
-    es = new Cygni::EffectSet(10, effects);
+    es = new Cygni::EffectSet(11, effects);
 }
 
 void loop() {

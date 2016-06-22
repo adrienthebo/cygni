@@ -10,3 +10,4 @@
 #include <cygni/effects/willow.hpp>
 #include <cygni/effects/nightsky.hpp>
 #include <cygni/effects/spectrum.hpp>
+#include <cygni/effects/periodic.hpp>
