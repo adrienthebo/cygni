@@ -13,7 +13,7 @@ namespace Cygni {
         void apply() {
             uint32_t idx = ++_counter % _output.size();
 
-            _output.set_pixel(idx, _h.red(), _h.green(), _h.blue());
+            _output.set_pixel(idx, _h.to_int());
 
             if(_counter % 2 == 0) {
                 scale();

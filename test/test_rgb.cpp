@@ -1,5 +1,5 @@
 #include <catch.hpp>
-#include <rgb.h>
+#include <cygni/rgb.hpp>
 
 using namespace Cygni;
 

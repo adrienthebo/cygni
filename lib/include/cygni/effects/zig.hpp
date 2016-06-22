@@ -21,7 +21,7 @@ namespace Cygni {
             if(move()) {
                 _output.set_pixel(_cur_idx, 0xFFFFFF);
             } else {
-                _output.set_pixel(_cur_idx, _hue.red(), _hue.green(), _hue.blue());
+                _output.set_pixel(_cur_idx, _hue.to_int());
             }
         }
 

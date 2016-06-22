@@ -1,7 +1,7 @@
 #pragma once
 
 #include "platform.h"
-#include "rgb.h"
+#include <cygni/rgb.hpp>
 
 namespace Cygni {
 

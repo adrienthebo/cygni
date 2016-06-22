@@ -1,6 +1,4 @@
-#include "platform.h"
 #include "grid.h"
-#include "rgb.h"
 
 namespace Cygni {
     Grid::Grid(int width, int height) {

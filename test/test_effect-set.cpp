@@ -1,6 +1,6 @@
 #include <catch.hpp>
 
-#include <effects/effect.hpp>
+#include <cygni/effects/effect.hpp>
 #include <outputs/output.h>
 #include <drivers/driver.h>
 
@@ -24,6 +24,7 @@ struct DummyEffect : Effect {
     DummyEffect(Output &o) : Effect(o) {}
 
     void apply() { applied = true; }
+    void call(Environment & env) { apply(); }
     bool applied = false;
 };
 

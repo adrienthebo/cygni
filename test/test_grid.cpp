@@ -1,6 +1,5 @@
 #include <catch.hpp>
 #include "../grid.h"
-#include "../rgb.h"
 
 using namespace Cygni;
 
@@ -120,9 +119,9 @@ TEST_CASE("range based for loop - alter all locations") {
 
     int count = 0;
     for(auto& it : g) {
-        it.red = count;
-        it.green = count;
-        it.blue = count;
+        it.r = count;
+        it.g = count;
+        it.b = count;
         ++count;
     }
 
