@@ -1,6 +1,6 @@
 #pragma once
 #include "effect.hpp"
-#include <Color.h>
+#include <cygni/hcl.hpp>
 #include <util.h>
 
 using namespace Cygni::Util;
@@ -42,14 +42,15 @@ namespace Cygni {
         }
 
         void apply() {
-            Color c;
 
             for(uint32_t i = 0; i < _size; i++) {
                 Drop &d = _drops[i];
 
-                c.convert_hcl_to_rgb(0.6, d.get_sat(), d.get_lum());
+                HCL hcl { 0.6, 0, 0 };
+                hcl.clamp_chroma_by(d.get_sat());
+                hcl.clamp_lum_by(d.get_lum());
 
-                _output.set_pixel(d._idx, c.red, c.green, c.blue);
+                _output.set_pixel(d._idx, hcl.to_int());
 
                 if(d._level <= 0.01) {
                     _output.clear_pixel(d._idx);

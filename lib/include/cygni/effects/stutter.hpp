@@ -1,7 +1,7 @@
 #pragma once
 #include "effect.hpp"
 #include <grid.h>
-#include <Color.h>
+#include <cygni/hcl.hpp>
 #include <util.h>
 
 using namespace Cygni::Util;
@@ -27,7 +27,10 @@ namespace Cygni {
                  * and boost the saturation of the current indices to reduce
                  * the low sat Easter effect.
                  */
-                wipe_indices(_hue, _sat + 0.15, _lum * 0.25);
+                HCL dimming_hcl(_hcl);
+                dimming_hcl.clamp_chroma_by(0.15);
+                dimming_hcl.clamp_lum(_hcl.lum() * 0.15);
+                wipe_indices(dimming_hcl);
                 set_indices();
                 set_color();
             }
@@ -37,7 +40,7 @@ namespace Cygni {
             }
 
             cycle();
-            wipe_indices(_hue, _sat, _lum);
+            wipe_indices(_hcl);
         }
 
         void call(Environment & env) { apply(); }
@@ -47,18 +50,12 @@ namespace Cygni {
         uint8_t _cycle_duration = 0;
         uint8_t _indices_duration = 0;
 
-        float _lum;
-        float _sat;
-        float _hue;
+        HCL _hcl;
 
-        Color c;
-
-        void wipe_indices(float hue, float sat, float lum) {
-            Color c;
-            c.convert_hcl_to_rgb(hue, sat, lum);
+        void wipe_indices(const HCL & hcl) {
             for(int i = 0; i < _indices_size; i++) {
                 uint32_t idx = _indices[i];
-                _output.set_pixel(idx, c.red, c.green, c.blue);
+                _output.set_pixel(idx, hcl.to_int());
             }
         }
 
@@ -70,13 +67,13 @@ namespace Cygni {
         }
 
         void set_color() {
-            _hue = randomf(1.0);
-            _sat = 0.5 + randomf(0.3);
+            _hcl.clamp_hue(randomf(1.0));
+            _hcl.clamp_chroma(0.5 + randomf(0.3));
         }
 
         void cycle() {
             _cycle_duration = 1 + multirandom(20, 3);
-            _lum = randomf(0.1);
+            _hcl.clamp_lum(randomf(0.1));
         }
     };
 };

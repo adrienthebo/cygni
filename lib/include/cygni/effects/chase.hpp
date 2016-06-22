@@ -1,9 +1,15 @@
 #pragma once
 #include "effect.hpp"
-#include <Color.h>
 #include <cygni/hue.hpp>
 
 namespace Cygni {
+    /**
+     * Six colors spread out across the hue spectrum, one chasing after
+     * another.
+     *
+     * This pattern is pretty ugly, especially because it doesn't do fuckall
+     * in dithering. It's jerky and harsh.
+     */
     struct Chase : Cygni::Effect {
 
         Chase(Output &output) : Effect(output) {}
@@ -17,14 +23,12 @@ namespace Cygni {
 
             uint32_t distance = _output.size() / _count;
 
-            float hue = 0.0;
-            for(uint32_t i = 0; i < _count; i++) {
-                hue += 1.0 / 6;
-                Color c;
-                c.convert_hcl_to_rgb(hue, _sat, _lum);
+            HCL hcl { 0.0, 0.9, 0.05 };
 
+            for(uint32_t i = 0; i < _count; i++) {
+                hcl.clamp_hue_by(1.0 / 6.0);
                 uint32_t idx = m_index(_counter + (i * distance));
-                _output.set_pixel(idx, c.red, c.green, c.blue);
+                _output.set_pixel(idx, hcl.to_int());
             }
             ++_counter;
         }
@@ -34,9 +38,6 @@ namespace Cygni {
         }
 
     private:
-
-        float _sat = 0.9;
-        float _lum = 0.05;
 
         uint32_t _count = 6;
 

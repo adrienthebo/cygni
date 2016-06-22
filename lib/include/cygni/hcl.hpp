@@ -17,14 +17,23 @@ struct HCL : Pixel {
 
     HCL(float h, float c, float l) : _hue(h), _chroma(c), _lum(l) {}
 
+    HCL(const HCL & rhs) {
+        _hue = rhs._hue;
+        _chroma = rhs._chroma;
+        _lum = rhs._lum;
+    }
+
+    void clamp_hue(const float & hue) { _hue = clamp(hue); }
     void clamp_hue_by(const float & delta) {
         _hue = clamp(_hue + delta);
     }
 
+    void clamp_chroma(const float & chroma) { _chroma = clamp(chroma); }
     void clamp_chroma_by(const float & delta) {
         _chroma = clamp(_chroma + delta);
     }
 
+    void clamp_lum(const float & lum) { _lum = clamp(lum); }
     void clamp_lum_by(const float & delta) {
         _lum = clamp(_lum + delta);
     }
@@ -64,6 +73,10 @@ struct HCL : Pixel {
     RGB to_rgb() const {
         return RGB(to_int());
     }
+
+    float hue() const { return _hue; }
+    float chroma() const { return _chroma; }
+    float lum() const { return _lum; }
 
     protected:
 
