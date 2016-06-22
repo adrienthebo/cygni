@@ -1,5 +1,6 @@
 #pragma once
 #include "effect.hpp"
+#include <cygni/effects/trunk.hpp>
 #include <cygni/hue.hpp>
 
 /**
@@ -7,31 +8,36 @@
  * a rippling color effect.
  */
 namespace Cygni {
-    struct Shift : Cygni::Effect {
+    struct Shift : Cygni::Trunk<Hue> {
 
-        Shift(Output &output) : Effect(output) {
-            _hue.clamp_chroma(0.8);
-            _hue.set_incr(0.003);
+        Shift(Output &output) : Trunk<Hue>(output) {
+            float hue_offset = 0.0;
+            float step = 0.02;
+            for(unsigned int i = 0, size = output.size(); i < size; ++i, hue_offset += step) {
+                Hue & curr = nodes[i];
+                curr.clamp_chroma(0.8);
+                curr.clamp_hue_by(hue_offset);
+                curr.set_incr(0.003);
+            }
         }
 
         virtual void apply() {
-            Hue current(_hue);
-            current.set_incr(0.02);
-            for(uint32_t idx = 0; idx < _output.size(); idx++) {
-                Hue glittered(current);
+            Trunk<Hue>::apply();
+
+            for(uint32_t idx = 0, size = _output.size(); idx < size; idx++) {
+                Hue glittered(nodes[idx]);
+
                 if(_twinkle_probability % random(_twinkle_probability) == 0) {
-                    glittered.clamp_lum(current.lum() * 2);
+                    glittered.clamp_lum(glittered.lum() * 2);
                 }
 
                 if(_unsat_probability % random(_unsat_probability) == 0) {
                     glittered.clamp_chroma(0.0);
-                    glittered.clamp_chroma(current.chroma() / 2);
+                    glittered.clamp_chroma(glittered.chroma() / 2);
                 }
 
                 _output.set_pixel(idx, glittered.to_int());
-                current.next();
             }
-            _hue.next();
         }
 
         void call(Environment & env) { apply(); }
