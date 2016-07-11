@@ -25,8 +25,8 @@ void setup() {
     srand(analogRead(0));
 
     /* Prepare debounced button */
-    pinMode(23, INPUT_PULLUP);
-    button.attach(23);
+    pinMode(12, INPUT_PULLUP);
+    button.attach(12);
     button.interval(5);
 
     /* Initialize onboard LED */
@@ -43,21 +43,15 @@ void setup() {
 
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
-        new Cygni::Periodic(q),
-        new Cygni::Spectrum(q),
-        new Cygni::Shift(q),
-        new Cygni::Spin(q),
-        new Cygni::Willow(q),
-        new Cygni::Cedar(q),
-        new Cygni::NightSky(q),
-        new Cygni::Rain(q),
         new Cygni::Chase(q),
+        new Cygni::Spin(q),
+        new Cygni::Spectrum(q),
+        new Cygni::Rain(q),
         new Cygni::Zig(q),
-        new Cygni::Stutter(q),
         new Cygni::Perseids(q),
     };
 
-    es = new Cygni::EffectSet(11, effects);
+    es = new Cygni::EffectSet(6, effects);
 }
 
 void loop() {
