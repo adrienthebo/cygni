@@ -13,3 +13,6 @@
 [submodule "vendor/Bounce2"]
 	path = vendor/Bounce2
 	url = https://github.com/thomasfredericks/Bounce2
+[submodule "vendor/spi"]
+	path = vendor/spi
+	url = https://github.com/PaulStoffregen/SPI

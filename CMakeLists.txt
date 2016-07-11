@@ -12,18 +12,19 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
   include("vendor/teensy-cmake/cmake/Teensy.cmake")
 
-
   include_directories(vendor/Color)
+  include_directories(vendor/spi)
   include_directories(vendor/OctoWS2811)
   include_directories(vendor/Bounce2)
 
   add_teensy_library(OctoWS2811 vendor/OctoWS2811/OctoWS2811.cpp)
+  add_teensy_library(SPI vendor/spi/SPI.cpp)
   add_teensy_library(Color vendor/Color/Color.cpp)
   add_teensy_library(Bounce2 vendor/Bounce2/Bounce2.cpp)
 
   add_teensy_core(teensy_core)
 
-  add_teensy_library(cygni grid.cpp drivers/octo-driver.cpp)
+  add_teensy_library(cygni grid.cpp drivers/octo-driver.cpp drivers/spi-driver.cpp)
 
   add_teensy_executable(burn-in exe/burn-in.cpp grid.cpp)
   target_link_libraries(burn-in cygni OctoWS2811 teensy_core)
@@ -40,4 +41,6 @@ else()
   add_teensy_executable(huron exe/huron.cpp grid.cpp vendor/OctoWS2811/OctoWS2811.cpp)
   target_link_libraries(huron Color Bounce2 cygni OctoWS2811 teensy_core)
 
+  add_teensy_executable(lightblade exe/lightblade.cpp)
+  target_link_libraries(lightblade cygni SPI teensy_core)
 endif()
