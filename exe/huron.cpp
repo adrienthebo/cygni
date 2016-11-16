@@ -18,16 +18,21 @@ Cygni::OctoDriver *driver;
 Cygni::Output *output;
 Cygni::EffectSet *es;
 
-Bounce button;
+Bounce next_button;
+Bounce prev_button;
 
 void setup() {
 
     srand(analogRead(0));
 
-    /* Prepare debounced button */
+    /* Prepare buttons */
     pinMode(23, INPUT_PULLUP);
-    button.attach(23);
-    button.interval(5);
+    next_button.attach(23);
+    next_button.interval(5);
+
+    pinMode(22, INPUT_PULLUP);
+    prev_button.attach(22);
+    prev_button.interval(5);
 
     /* Initialize onboard LED */
     pinMode(13, OUTPUT);
@@ -63,10 +68,14 @@ void setup() {
 }
 
 void loop() {
-    button.update();
-    if(button.fell()) {
+    next_button.update();
+    prev_button.update();
+    if(next_button.fell()) {
         driver->clear();
         es->next_effect();
+    } else if(prev_button.fell()) {
+        driver->clear();
+        es->prev_effect();
     }
 
     es->apply();
