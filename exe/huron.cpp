@@ -5,7 +5,7 @@
 #include <outputs/octo-output.h>
 
 #include <cygni/effects.hpp>
-#include "effect-set.h"
+#include <cygni/effect-set.hpp>
 
 #include <Bounce2.h>
 
@@ -50,14 +50,16 @@ void setup() {
         new Cygni::Willow(q),
         new Cygni::Cedar(q),
         new Cygni::NightSky(q),
+        new Cygni::Autumn(q),
         new Cygni::Rain(q),
+        new Cygni::Sparks(q),
         new Cygni::Chase(q),
         new Cygni::Zig(q),
         new Cygni::Stutter(q),
         new Cygni::Perseids(q),
     };
 
-    es = new Cygni::EffectSet(11, effects);
+    es = new Cygni::EffectSet(14, effects);
 }
 
 void loop() {
