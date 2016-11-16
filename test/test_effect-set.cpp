@@ -4,7 +4,7 @@
 #include <outputs/output.h>
 #include <drivers/driver.h>
 
-#include "effect-set.h"
+#include <cygni/effect-set.hpp>
 
 using namespace Cygni;
 
