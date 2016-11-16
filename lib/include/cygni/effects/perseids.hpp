@@ -110,7 +110,7 @@ namespace Cygni {
 
             scale();
 
-            c.convert_hcl_to_rgb(0.0, 0.0, _m->luminosity());
+            c.convert_hcl_to_rgb(0.1, 0.99, _m->luminosity());
 
             _output.set_pixel(step_to, c.red, c.green, c.blue);
         }
