@@ -33,7 +33,7 @@ SCENARIO("Initialize effect set") {
     REQUIRE(es.get_size() == 1);
 }
 
-SCENARIO("Incrementing the effect index") {
+SCENARIO("Changing the effect index") {
     DummyOutput o;
 
     DummyEffect d0(o);
@@ -41,24 +41,47 @@ SCENARIO("Incrementing the effect index") {
 
     Effect *effects[] = {&d0, &d1};
 
-    EffectSet es(2, effects);
 
-    WHEN("index has not been altered") {
-        REQUIRE(es.get_index() == 0);
-        REQUIRE(es.current() == &d0);
+    WHEN("index is at initial state") {
+        EffectSet subject(2, effects);
+        REQUIRE(subject.get_index() == 0);
+        REQUIRE(subject.current() == &d0);
     }
 
-    es.next_effect();
 
-    WHEN("index has been incremented") {
-        REQUIRE(es.get_index() == 1);
-        REQUIRE(es.current() == &d1);
+    WHEN("incrementing the index") {
+        EffectSet subject(2, effects);
+        WHEN("not overflowing") {
+            subject.next_effect();
+
+            REQUIRE(subject.get_index() == 1);
+            REQUIRE(subject.current() == &d1);
+        }
+
+        WHEN("overflowing") {
+            subject.next_effect();
+
+            REQUIRE(subject.current() == &d0);
+            REQUIRE(subject.get_index() == 0);
+        }
     }
 
-    es.next_effect();
+    WHEN("decrementing the index") {
+        EffectSet subject(2, effects);
+        WHEN("not underflowing") {
+            subject.next_effect();
+            subject.prev_effect();
 
-    WHEN("index rolls over") {
-        REQUIRE(es.current() == &d0);
-        REQUIRE(es.get_index() == 0);
+            REQUIRE(subject.get_index() == 0);
+            REQUIRE(subject.current() == &d0);
+        }
+
+        WHEN("underflowing") {
+            subject.prev_effect();
+            subject.prev_effect();
+
+            REQUIRE(subject.current() == &d1);
+            REQUIRE(subject.get_index() == 1);
+        }
     }
 }

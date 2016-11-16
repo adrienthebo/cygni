@@ -21,6 +21,14 @@ namespace Cygni {
             _index = (_index + 1) % _size;
         }
 
+        void prev_effect() {
+            if(_index > 0) {
+                _index -= 1;
+            } else {
+                _index = _size - 1;
+            }
+        }
+
         uint32_t get_size() {
             return _size;
         }
