@@ -9,5 +9,7 @@
 #include <cygni/effects/cedar.hpp>
 #include <cygni/effects/willow.hpp>
 #include <cygni/effects/nightsky.hpp>
+#include <cygni/effects/autumn.hpp>
 #include <cygni/effects/spectrum.hpp>
 #include <cygni/effects/periodic.hpp>
+#include <cygni/effects/sparks.hpp>
