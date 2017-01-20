@@ -4,6 +4,8 @@
 #include <outputs/output.h>
 #include <cygni/environment.hpp>
 
+#define BRIGHTNESS_FACTOR 2.0
+
 namespace Cygni {
     struct Effect {
         Effect(Output &output) : _output(output) { }

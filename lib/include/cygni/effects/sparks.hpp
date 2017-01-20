@@ -20,7 +20,7 @@ namespace Cygni {
         void fade() {
             _level -= 0.004;
             if(_level <= 0.0) {
-                _level += 0.5 - randomf(0.25);
+                _level += 0.7 - randomf(0.25);
             }
         }
 

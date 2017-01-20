@@ -8,7 +8,7 @@ namespace Cygni {
     struct Star {
 
         Star() :
-            _lum(0.0, 0.05, 0.001, 0.0)
+            _lum(0.0, 0.05 * BRIGHTNESS_FACTOR, 0.001, 0.0)
         {}
 
         void step() {

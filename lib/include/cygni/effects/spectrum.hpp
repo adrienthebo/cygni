@@ -41,7 +41,7 @@ namespace Cygni {
 
         float _hue = 0.0;
         float _sat = 0.8;
-        float _lum = 0.05;
+        float _lum = 0.2;
 
         int _twinkle_probability = 10000;
         int _unsat_probability = 25000;

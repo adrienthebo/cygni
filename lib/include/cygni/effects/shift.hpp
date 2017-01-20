@@ -28,7 +28,7 @@ namespace Cygni {
                 Hue glittered(nodes[idx]);
 
                 if(_twinkle_probability % random(_twinkle_probability) == 0) {
-                    glittered.clamp_lum(glittered.lum() * 2);
+                    glittered.clamp_lum(glittered.lum() * 3);
                 }
 
                 if(_unsat_probability % random(_unsat_probability) == 0) {

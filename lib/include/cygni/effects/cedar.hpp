@@ -9,7 +9,7 @@ namespace Cygni {
 
         CedarLeaf() :
             _hue(0.3, 0.7, 0.0005),
-            _lum(0.0, 0.05, 0.0005, 0.0)
+            _lum(0.0, 0.05 * BRIGHTNESS_FACTOR, 0.0005, 0.0)
         {}
 
         void step() {

@@ -9,7 +9,7 @@ namespace Cygni {
 
         AutumnLeaf() :
             _hue(0.0, 0.1, 0.0005),
-            _lum(0.0, 0.05, 0.0005, 0.0)
+            _lum(0.0, 0.05 * BRIGHTNESS_FACTOR , 0.0005, 0.0)
         {}
 
         void step() {
