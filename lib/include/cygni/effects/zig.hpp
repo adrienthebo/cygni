@@ -11,6 +11,7 @@ namespace Cygni {
             _tgt_idx = random(_output.size());
             _ctr = 0;
             _hue = Hue();
+            _hue.clamp_lum(0.1);
         }
 
         void apply() {
@@ -19,7 +20,7 @@ namespace Cygni {
             _hue.next();
 
             if(move()) {
-                _output.set_pixel(_cur_idx, 0xFFFFFF);
+                _output.set_pixel(_cur_idx, 192, 192, 192);
             } else {
                 _output.set_pixel(_cur_idx, _hue.to_int());
             }
@@ -48,7 +49,7 @@ namespace Cygni {
             RGB tmp;
             for(uint32_t i = 0; i < _output.size(); i++) {
                 tmp.from_int(_output.get_pixel(i));
-                tmp.scale(240);
+                tmp.scale(250);
                 _output.set_pixel(i, tmp.to_int());
             }
         }
