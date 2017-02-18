@@ -65,8 +65,8 @@ namespace Cygni {
 
     private:
 
-        static constexpr uint32_t max_mass = 200;
-        static constexpr uint32_t max_heat = 200;
+        static constexpr uint32_t max_mass = 300;
+        static constexpr uint32_t max_heat = 300;
         static constexpr uint32_t max_luminosity = (max_mass / 2) * (max_heat / 2);
 
         void burn() {
@@ -77,7 +77,7 @@ namespace Cygni {
         void regen() {
             _heat = 0;
             _mass = random(max_mass / 2) + max_mass / 2;
-            _velocity = (randomf(1.0) - 0.5);
+            _velocity = (randomf(2.0) - 1.00);
             _pos = randomf(_max);
         }
 
@@ -124,7 +124,7 @@ namespace Cygni {
             RGB tmp;
             for(uint32_t i = 0; i < _output.size(); i++) {
                 tmp.from_int(_output.get_pixel(i));
-                tmp.scale(248);
+                tmp.scale(254);
                 _output.set_pixel(i, tmp.to_int());
             }
         }
