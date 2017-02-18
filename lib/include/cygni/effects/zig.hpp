@@ -6,23 +6,23 @@
 namespace Cygni {
     struct Zig : Effect {
 
+        const int SCALE_FACTOR = 2;
+
         Zig(Output &output) : Effect(output) {
-            _cur_idx = random(_output.size());
-            _tgt_idx = random(_output.size());
-            _ctr = 0;
+            _position = random(_output.size() * SCALE_FACTOR);
+            _target = random(_output.size() * SCALE_FACTOR);
             _hue = Hue();
             _hue.clamp_lum(0.1);
+            _hue.set_incr(0.001);
         }
 
         void apply() {
-            scale();
-
             _hue.next();
 
             if(move()) {
-                _output.set_pixel(_cur_idx, 192, 192, 192);
+                _output.set_pixel(_position / SCALE_FACTOR, 0xFFFFFF);
             } else {
-                _output.set_pixel(_cur_idx, _hue.to_int());
+                _output.set_pixel(_position / SCALE_FACTOR, _hue.to_int());
             }
         }
 
@@ -32,12 +32,12 @@ namespace Cygni {
          * Returns true if we've reached our destination, false otherwise.
          */
         bool move() {
-            if(_tgt_idx > _cur_idx) {
-                ++_cur_idx;
-            } else if(_tgt_idx < _cur_idx) {
-                --_cur_idx;
+            if(_target > _position) {
+                ++_position;
+            } else if(_target < _position) {
+                --_position;
             } else {
-                _tgt_idx = random(_output.size());
+                _target = random(_output.size() * SCALE_FACTOR);
                 return true;
             }
             return false;
@@ -45,18 +45,13 @@ namespace Cygni {
 
     private:
 
-        void scale() {
-            RGB tmp;
-            for(uint32_t i = 0; i < _output.size(); i++) {
-                tmp.from_int(_output.get_pixel(i));
-                tmp.scale(250);
-                _output.set_pixel(i, tmp.to_int());
-            }
+        int clamp(int cl) {
+            while(cl > 10) { cl -= 10; }
+            return cl;
         }
 
         Hue _hue;
-        uint32_t _cur_idx;
-        uint32_t _tgt_idx;
-        uint32_t _ctr;
+        uint32_t _position;
+        uint32_t _target;
     };
 };
