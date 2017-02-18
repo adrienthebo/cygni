@@ -48,23 +48,25 @@ void setup() {
 
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
-        new Cygni::Periodic(q),
-        new Cygni::Spectrum(q),
-        new Cygni::Shift(q),
-        new Cygni::Spin(q),
-        new Cygni::Willow(q),
-        new Cygni::Cedar(q),
+        new Cygni::PeriodicSplit(q),
+        new Cygni::ZigFade(q),
         new Cygni::NightSky(q),
-        new Cygni::Autumn(q),
-        new Cygni::Rain(q),
         new Cygni::Sparks(q),
-        new Cygni::Chase(q),
+        new Cygni::Shift(q),
+        new Cygni::Willow(q),
+        new Cygni::Periodic(q),
+        new Cygni::Autumn(q),
+        new Cygni::Spectrum(q),
+        new Cygni::Rain(q),
+        new Cygni::Cedar(q),
         new Cygni::Zig(q),
-        new Cygni::Stutter(q),
         new Cygni::Perseids(q),
+        //new Cygni::Spin(q),
+        //new Cygni::Chase(q),
+        //new Cygni::Stutter(q),
     };
 
-    es = new Cygni::EffectSet(14, effects);
+    es = new Cygni::EffectSet(13, effects);
 }
 
 void loop() {

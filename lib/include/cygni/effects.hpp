@@ -13,3 +13,5 @@
 #include <cygni/effects/spectrum.hpp>
 #include <cygni/effects/periodic.hpp>
 #include <cygni/effects/sparks.hpp>
+#include <cygni/effects/zig-fade.hpp>
+#include <cygni/effects/periodic-split.hpp>
