@@ -1,7 +1,7 @@
 #include <catch.hpp>
-#include "../boundedvalue.h"
+#include <cygni/util/boundedvalue.hpp>
 
-using namespace Cygni;
+using namespace Cygni::Util;
 
 SCENARIO("bounded value", "[BoundedValue]") {
     BoundedValue<float> f { 0.0, 0.5, 0.1, 0.2 };

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cygni/effects/trunk.hpp>
-#include "boundedrand.h"
+#include <cygni/util/boundedrand.hpp>
 
 namespace Cygni {
 
@@ -23,9 +23,8 @@ namespace Cygni {
         }
 
     private:
-
-        BoundedRand<float> _hue;
-        BoundedRand<float> _lum;
+        Cygni::Util::BoundedRand<float> _hue;
+        Cygni::Util::BoundedRand<float> _lum;
     };
 
     struct Autumn : public Cygni::Trunk<AutumnLeaf> {
