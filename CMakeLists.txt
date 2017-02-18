@@ -5,7 +5,7 @@ include_directories(.)
 include_directories("lib/include")
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  add_library(cygni lib/src/hcl.cpp grid.cpp)
+  add_library(cygni lib/src/rgb.cpp lib/src/hcl.cpp grid.cpp)
   target_compile_features(cygni PUBLIC cxx_nonstatic_member_init cxx_range_for)
 
   add_subdirectory(test)
@@ -23,7 +23,7 @@ else()
 
   add_teensy_core(teensy_core)
 
-  add_teensy_library(cygni grid.cpp lib/src/hcl.cpp drivers/octo-driver.cpp)
+  add_teensy_library(cygni grid.cpp lib/src/rgb.cpp lib/src/hcl.cpp drivers/octo-driver.cpp)
 
   add_teensy_executable(burn-in exe/burn-in.cpp grid.cpp)
   target_link_libraries(burn-in cygni OctoWS2811 teensy_core)
