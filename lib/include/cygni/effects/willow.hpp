@@ -9,7 +9,7 @@ namespace Cygni {
 
         WillowLeaf() :
             _hue(0.55, 0.9, 0.0005),
-            _lum(0.0, 0.2, 0.0005, 0.0)
+            _lum(0.0, 0.05 * BRIGHTNESS_FACTOR, 0.0005, 0.0)
         {}
 
         void step() {
