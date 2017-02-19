@@ -3,15 +3,11 @@
 #include <cygni/effects/trunk.hpp>
 
 /**
- * Rotate all LEDs through the hue spectrum, with an increasing change rate
- * across the entire strip.
- *
- * SPLIT IN HALF
+ * Rotate all LEDs through the hue spectrum, with the hue rotation rate proportional to the
+ * distance from the edge of the strip.
  */
 namespace Cygni {
-
     struct PeriodicSplit : Cygni::Trunk<Hue> {
-
         PeriodicSplit(Output &output) : Trunk<Hue>(output) {
             float delta = 0.0002;
             float speed = delta * output.size();
