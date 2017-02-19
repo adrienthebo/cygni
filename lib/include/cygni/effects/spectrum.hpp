@@ -43,7 +43,7 @@ namespace Cygni {
         float _sat = 0.8;
         float _lum = 0.1;
 
-        int _twinkle_probability = 10000;
-        int _unsat_probability = 25000;
+        static constexpr int _twinkle_probability = 10000;
+        static constexpr int _unsat_probability = 25000;
     };
 };
