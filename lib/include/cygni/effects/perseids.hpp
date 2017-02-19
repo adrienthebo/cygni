@@ -1,7 +1,8 @@
 #pragma once
-#include "effect.hpp"
-#include <Color.h>
 #include <util.h>
+
+#include <cygni/effects/effect.hpp>
+#include <cygni/hcl.hpp>
 
 using namespace Cygni::Util;
 
@@ -22,23 +23,6 @@ namespace Cygni {
             uint32_t raw_lum = ((mass_factor * mass_factor) + (heat_factor * heat_factor));
 
             float scaled_lum = static_cast<float>(raw_lum / 8) / max_luminosity;
-
-            // TODO: add tests for this instead of a commented out, hack serial block.
-
-            /*
-            Serial.print("mass factor: ");
-            Serial.print(_mass, DEC);
-            Serial.print(" | ");
-            Serial.print("heat factor: ");
-            Serial.print(_heat, DEC);
-            Serial.print(" | ");
-            Serial.print("raw lum: ");
-            Serial.print(raw_lum, DEC);
-            Serial.print(" | ");
-            Serial.print("scaled lum: ");
-            Serial.print(scaled_lum, 2);
-            Serial.println();
-            */
 
             return scaled_lum;
         };
@@ -104,15 +88,13 @@ namespace Cygni {
         }
 
         void apply() {
-            Color c;
+            HCL c { 0.1, 0.99, _m->luminosity() };
 
             uint32_t step_to = _m->step();
 
             scale();
 
-            c.convert_hcl_to_rgb(0.1, 0.99, _m->luminosity());
-
-            _output.set_pixel(step_to, c.red, c.green, c.blue);
+            _output.set_pixel(step_to, c.to_int());
         }
 
         void call(Environment & env) { apply(); }
