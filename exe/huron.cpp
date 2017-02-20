@@ -48,6 +48,7 @@ void setup() {
 
     /* Configure LEDs and effects */
     Cygni::Effect *effects[] = {
+        new Cygni::Wanderer(q),
         new Cygni::PeriodicSplit(q),
         new Cygni::ZigFade(q),
         new Cygni::NightSky(q),
@@ -66,7 +67,7 @@ void setup() {
         //new Cygni::Stutter(q),
     };
 
-    es = new Cygni::EffectSet(13, effects);
+    es = new Cygni::EffectSet(14, effects);
 }
 
 void loop() {

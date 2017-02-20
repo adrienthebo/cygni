@@ -15,3 +15,4 @@
 #include <cygni/effects/sparks.hpp>
 #include <cygni/effects/zig-fade.hpp>
 #include <cygni/effects/periodic-split.hpp>
+#include <cygni/effects/wanderer.hpp>
