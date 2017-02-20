@@ -17,7 +17,7 @@ namespace Cygni {
         }
 
         void apply() {
-            _hue.next();
+            _hue.step();
 
             if(move()) {
                 _output.set_pixel(_position / SCALE_FACTOR, 0xFFFFFF);

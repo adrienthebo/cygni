@@ -18,7 +18,7 @@ namespace Cygni {
             if(_counter % 2 == 0) {
                 scale();
             }
-            _h.next();
+            _h.step();
         }
 
         void call(Environment & env) { apply(); }

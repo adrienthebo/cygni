@@ -9,13 +9,8 @@ namespace Cygni {
             _incr = rhs._incr;
         }
 
-        void next() {
+        void step() {
             clamp_hue_by(_incr);
-        }
-
-        // TODO: PICK A NAME FOR THIS SORT OF THING
-        inline void step() {
-            next();
         }
 
         void set_incr(float incr) {
