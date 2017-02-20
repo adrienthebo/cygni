@@ -1,7 +1,7 @@
 #pragma once
 
 #include <cygni/hcl.hpp>
-#include <util.h>
+#include <cygni/util.hpp>
 #include "effect.hpp"
 
 namespace Cygni {
