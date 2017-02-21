@@ -1,19 +1,22 @@
 #pragma once
 
+#include <cygni/util/range.hpp>
+
 namespace Cygni {
     namespace Util {
         template <typename T>
-        struct BoundedValue {
+        struct BoundedValue : public Range<T> {
 
-            T min;
-            T max;
+            using Range<T>::min;
+            using Range<T>::max;
+
             T by;
             T val;
 
             BoundedValue(T cmin, T cmax, T cby, T cval) :
-                min(cmin), max(cmax), by(cby), val(cval) {};
+                Range<T>(cmin, cmax), by(cby), val(cval) {};
 
-            const T & step() {
+            virtual const T & step() {
                 T next = val + by;
                 if (next <= min || next >= max) {
                     by = -by;
