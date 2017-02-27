@@ -12,14 +12,16 @@ if(CMAKE_BUILD_TYPE STREQUAL "Debug")
 else()
   include("vendor/teensy-cmake/cmake/Teensy.cmake")
 
+  add_teensy_core(teensy_core)
 
   include_directories(vendor/OctoWS2811)
-  include_directories(vendor/Bounce2)
-
   add_teensy_library(OctoWS2811 vendor/OctoWS2811/OctoWS2811.cpp)
+
+  include_directories(vendor/Bounce2)
   add_teensy_library(Bounce2 vendor/Bounce2/Bounce2.cpp)
 
-  add_teensy_core(teensy_core)
+  include_directories(vendor/TeensyDmx)
+  add_teensy_library(TeensyDmx vendor/TeensyDmx/TeensyDmx.cpp)
 
   add_teensy_library(cygni grid.cpp lib/src/rgb.cpp lib/src/hcl.cpp drivers/octo-driver.cpp)
 
@@ -37,5 +39,8 @@ else()
 
   add_teensy_executable(huron exe/huron.cpp grid.cpp vendor/OctoWS2811/OctoWS2811.cpp)
   target_link_libraries(huron Bounce2 cygni OctoWS2811 teensy_core)
+
+  add_teensy_executable(dmx-transmit exe/dmx-transmit.cpp)
+  target_link_libraries(dmx-transmit TeensyDmx teensy_core)
 
 endif()

@@ -13,3 +13,6 @@
 [submodule "vendor/Bounce2"]
 	path = vendor/Bounce2
 	url = https://github.com/thomasfredericks/Bounce2
+[submodule "vendor/TeensyDmx"]
+	path = vendor/TeensyDmx
+	url = https://github.com/chrisstaite/TeensyDmx
