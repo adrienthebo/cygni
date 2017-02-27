@@ -16,8 +16,8 @@ void bitBang(uint8_t pin, uint32_t delayPeriod) {
 }
 
 void setup() {
-    for(int i = 0; i < pin_count; i++) {
-        pinMode(i, OUTPUT);
+    for(int idx = 0; idx < pin_count; idx++) {
+        pinMode(octo_pins[idx], OUTPUT);
     }
     setup13();
 }

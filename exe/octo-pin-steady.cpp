@@ -7,8 +7,8 @@ uint8_t pin_count = 8;
 using namespace pin13;
 
 void setup() {
-    for(int i = 0; i < pin_count; i++) {
-        pinMode(i, OUTPUT);
+    for(int idx = 0; idx < pin_count; idx++) {
+        pinMode(octo_pins[idx], OUTPUT);
     }
     setup13();
 }
@@ -18,13 +18,13 @@ void loop() {
     for(int idx = 0; idx < pin_count; idx++) {
         digitalWrite(octo_pins[idx], HIGH);
     }
-    delay(1000);
+    delay(3000);
 
     digitalWrite(13, LOW);
     for(int idx = 0; idx < pin_count; idx++) {
         digitalWrite(octo_pins[idx], LOW);
     }
-    delay(100);
+    delay(1000);
 }
 
 int main() {
