@@ -1,2 +1,4 @@
 build
 debug
+Gemfile.lock
+Gemfile.local
