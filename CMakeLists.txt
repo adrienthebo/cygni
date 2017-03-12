@@ -43,4 +43,6 @@ else()
   add_teensy_executable(dmx-transmit exe/dmx-transmit.cpp)
   target_link_libraries(dmx-transmit TeensyDmx teensy_core)
 
+  add_teensy_executable(dmx-recv exe/dmx-recv.cpp)
+  target_link_libraries(dmx-recv TeensyDmx teensy_core)
 endif()
