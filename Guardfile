@@ -43,15 +43,23 @@ module ::Guard
     def make
       Guard::Compat::UI.notify(
         "Build started for #{@builddir.inspect}",
-        title: "CMake build triggered"
+        title: "CMake build triggered",
+        image: :pending
       )
 
       pid = Process.spawn("make", chdir: @builddir)
       _, status = Process.waitpid2(pid)
 
-      Guard::Compat::UI.notify(
-        "Build completed. Exit status: #{status.exitstatus}",
-        title: "CMake build complete")
+      if status.exitstatus == 0
+        Guard::Compat::UI.notify(
+          "Build completed. Exit status: #{status.exitstatus}",
+          title: "CMake build complete")
+      else
+        Guard::Compat::UI.notify(
+          "Build completed. Exit status: #{status.exitstatus}",
+          title: "CMake build FAILED",
+          image: :failed)
+      end
     end
   end
 end
@@ -63,11 +71,9 @@ module ::Guard
     end
 
     def self.flash(path, tyc_id)
-      puts "Acquiring programming lock, this might take a moment."
+      Guard::Compat::UI.info("Acquiring lock to flash #{tyc_id}. This might take a moment.")
       mutex.synchronize do
         flash!(path, tyc_id)
-        Guard::Compat::UI.info("Waiting for Teensys to stabilize. (Yeah, cargo culty.)")
-        sleep 3
       end
     end
 
@@ -77,19 +83,26 @@ module ::Guard
         "Teensy #{tyc_id} is being reflashed with #{path}",
         title: "TYC reflash triggered.")
 
-      cmd = ['echo', 'tyc', 'upload', '-B', tyc_id, path]
+      cmd = ['tyc', 'upload', '-B', tyc_id, path]
       pid = Process.spawn(*cmd)
       _, status = Process.waitpid2(pid)
 
-      Guard::Compat::UI.notify(
-        "Teensy #{tyc_id} has been reflashed. Exit status: #{status.exitstatus}",
-        title: "TYC reflash complete.")
+      if status.exitstatus == 0
+        Guard::Compat::UI.notify(
+          "Teensy #{tyc_id} has been reflashed. Exit status: #{status.exitstatus}",
+          title: "TYC reflash complete.")
+      else
+        Guard::Compat::UI.notify(
+          "Teensy #{tyc_id} has been reflashed. Exit status: #{status.exitstatus}",
+          title: "TYC reflash FAILED.",
+          image: :failed)
+      end
     end
 
     def initialize(options = {}, &block)
       super
       puts "TODO: implement target map"
-      @targets = options.fetch(:targets, [])
+      @buildmap = options.fetch(:buildmap, {})
       @builddir = options.fetch(:builddir, default_builddir)
     end
 
@@ -102,7 +115,14 @@ module ::Guard
     end
 
     def run_on_modifications(paths)
-      paths.each { |path| self.class.flash(path, "DUMMY TEENSY") }
+      paths.each do |path|
+        tyc_id = @buildmap[path]
+        if tyc_id
+          self.class.flash(path, tyc_id)
+        else
+          Guard::Compat::UI.info("Device not defined for #{path}")
+        end
+      end
     end
 
     def run_on_deletions(paths)
@@ -122,8 +142,16 @@ end
 
 guard :cmake do
   watch(%r{^lib})
+  watch(%r{^exe})
+  watch(%r{CMakeLists\.txt})
+  watch(%r{\.(?:cpp|hpp|h)$})
 end
 
-guard :tyc do
+buildmap = {
+  'build/dmx-transmit.elf.hex' => '943610-Teensy',
+  'build/dmx-recv.elf.hex' => '1073050-Teensy',
+}
+
+guard(:tyc, buildmap: buildmap) do
   watch(%r{^build/(.*\.hex)})
 end

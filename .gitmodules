@@ -16,3 +16,6 @@
 [submodule "vendor/TeensyDmx"]
 	path = vendor/TeensyDmx
 	url = https://github.com/chrisstaite/TeensyDmx
+[submodule "vendor/DmxReceiver"]
+	path = vendor/DmxReceiver
+	url = https://github.com/jimparis/DmxReceiver
