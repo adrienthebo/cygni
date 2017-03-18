@@ -23,6 +23,9 @@ else()
   include_directories(vendor/TeensyDmx)
   add_teensy_library(TeensyDmx vendor/TeensyDmx/TeensyDmx.cpp)
 
+  include_directories(vendor/DmxReceiver)
+  add_teensy_library(DmxReceiver vendor/DmxReceiver/DmxReceiver.cpp)
+
   add_teensy_library(cygni grid.cpp lib/src/rgb.cpp lib/src/hcl.cpp drivers/octo-driver.cpp)
 
   add_teensy_executable(burn-in exe/burn-in.cpp grid.cpp)
@@ -44,5 +47,5 @@ else()
   target_link_libraries(dmx-transmit TeensyDmx teensy_core)
 
   add_teensy_executable(dmx-recv exe/dmx-recv.cpp)
-  target_link_libraries(dmx-recv TeensyDmx teensy_core)
+  target_link_libraries(dmx-recv DmxReceiver cygni OctoWS2811 teensy_core)
 endif()

@@ -6,9 +6,11 @@ using namespace pin13;
 
 static constexpr uint8_t rs485_enable = 3;
 
-byte DMXVal[] = {0xFE};
+byte DMXVal[] = {0x01};
 
 TeensyDmx Dmx(Serial1, rs485_enable);
+
+static uint8_t ctr = 0;
 
 void setup() {
     setup13();
@@ -16,7 +18,11 @@ void setup() {
 }
 
 void loop() {
-    Dmx.setChannels(0, DMXVal, 1);
-    Dmx.loop();
+    for(uint16_t offset = 0; offset < 512; ++offset) {
+        Dmx.setChannel(offset, ctr);
+    }
     pulse13(50, 2);
+    if(++ctr >= 32) {
+        ctr = 0;
+    }
 }
