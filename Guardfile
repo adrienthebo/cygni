@@ -70,13 +70,27 @@ module ::Guard
       @_mutex ||= Mutex.new
     end
 
+    # @todo make not suck
+    def self.teensy_present?(tyc_id)
+      tyc_list = %x{tyc list}
+      !!tyc_list.match(/#{tyc_id}/)
+    end
+
     def self.flash(path, tyc_id)
       Guard::Compat::UI.info("Acquiring lock to flash #{tyc_id}. This might take a moment.")
       mutex.synchronize do
-        flash!(path, tyc_id)
+        if teensy_present?(tyc_id)
+          flash!(path, tyc_id)
+        else
+        Guard::Compat::UI.notify(
+          "Teensy #{tyc_id} is not connected and cannot be reflashed.",
+          title: "TYC reflash FAILED.",
+          image: :failed)
+        end
       end
     end
 
+    # @todo ensure board is connected before flashing.
     def self.flash!(path, tyc_id)
 
       Guard::Compat::UI.notify(
